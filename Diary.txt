@@ -1,0 +1,31 @@
+01/10/2023:
+- Read and Researched the rules of Stratego and watched a game online (YouTube).
+
+02/10/2023:
+- Tried to play my own stratego game to get used to the rule as well as the layout and characters movement.
+
+03/10/2023:
+- Further improved my understanding of Stratego by reading some tips and tools about how to play it well and
+put it into practice again.
+
+04/10/2023:
+- Set up my coding environment by downloading the latest version of Eclipse (IDE) and Java SDK as well as
+testing it on a small helloworld.java project.
+
+05/10/2023:
+- Read online about Javafx and how to use it. Watched a video of someone using it to try to understand how it works.
+
+06/10/2023:
+- Set up Javafx on my Eclipse and attempted to create a small Javafx project following a tutorial.
+
+07/10/2023:
+- Further improved my understanding of JavaFX with the installation of scene builder as a helping tool.
+
+08/10/2023:
+- Day off
+
+09/10/2023:
+- Attempted a small helloworld.java project using scene builder and javafx.
+
+10/10/2023:
+- Read about maven as a build automation tool.
