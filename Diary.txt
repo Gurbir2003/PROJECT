@@ -29,3 +29,18 @@ testing it on a small helloworld.java project.
 
 10/10/2023:
 - Read about maven as a build automation tool.
+
+15/10/2023:
+- Followed a Scenebuilder tutorial online to create a small project.
+
+16/10/2023:
+- Familiarised myself with the interface of scenebuilder.
+
+17/10/2023:
+- First UML class diagram draft.
+
+18/10/2023:
+- User cases draft.
+
+19/10/2023 to 25/10/2023:
+- Drafting an initial design document, outlining expected functionalities and UI expectations.
