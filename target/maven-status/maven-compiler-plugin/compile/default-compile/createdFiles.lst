@@ -1,3 +1,5 @@
-uk\co\gurbir\PROJECT\App.class
+model\Stratego.class
 uk\co\gurbir\PROJECT\PrimaryController.class
 uk\co\gurbir\PROJECT\SecondaryController.class
+model\Timer.class
+uk\co\gurbir\PROJECT\App.class
