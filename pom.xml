@@ -15,6 +15,20 @@
             <artifactId>javafx-controls</artifactId>
             <version>13</version>
         </dependency>
+        <!-- JUnit Jupiter API for writing tests -->
+	    <dependency>
+	        <groupId>org.junit.jupiter</groupId>
+	        <artifactId>junit-jupiter-api</artifactId>
+	        <version>5.7.0</version>
+	        <scope>test</scope>
+	    </dependency>
+	    <!-- JUnit Jupiter Engine for running tests -->
+	    <dependency>
+	        <groupId>org.junit.jupiter</groupId>
+	        <artifactId>junit-jupiter-engine</artifactId>
+	        <version>5.7.0</version>
+	        <scope>test</scope>
+	    </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
