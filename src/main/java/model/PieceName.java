@@ -14,13 +14,13 @@ public enum PieceName {
     GENERAL("General"),
     MARSHAL("Marshal");
 
-    private final String displayName;
+    private final String name;
 
-    PieceName(String displayName) {
-        this.displayName = displayName;
+    PieceName(String name) {
+        this.name = name;
     }
 
-    public String getDisplayName() {
-        return displayName;
+    public String getName() {
+        return name;
     }
 }
