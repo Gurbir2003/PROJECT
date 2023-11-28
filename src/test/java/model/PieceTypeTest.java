@@ -1,6 +1,7 @@
 package model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -36,6 +37,20 @@ public class PieceTypeTest {
 		assertEquals(9, PieceType.GENERAL.getRank());
 		assertEquals(10, PieceType.MARSHAL.getRank());
 		assertEquals(11, PieceType.FLAG.getRank());
+	}
+	
+	@Test
+	public void testPieceFightRankBomb() {
+		assertTrue(PieceType.MINER.compareWith(PieceType.BOMB) == 1);
+		assertTrue(PieceType.SPY.compareWith(PieceType.BOMB) == -1);
+		assertTrue(PieceType.SERGEANT.compareWith(PieceType.BOMB) == -1);
+		assertTrue(PieceType.LIEUTENANT.compareWith(PieceType.BOMB) == -1);
+		assertTrue(PieceType.CAPTAIN.compareWith(PieceType.BOMB) == -1);
+		assertTrue(PieceType.MAJOR.compareWith(PieceType.BOMB) == -1);
+		assertTrue(PieceType.COLONEL.compareWith(PieceType.BOMB) == -1);
+		assertTrue(PieceType.GENERAL.compareWith(PieceType.BOMB) == -1);
+		assertTrue(PieceType.MARSHAL.compareWith(PieceType.BOMB) == -1);
+		assertTrue(PieceType.BOMB.compareWith(PieceType.BOMB) == 0);
 	}
 
 }

@@ -29,4 +29,18 @@ public enum PieceType {
     public int getRank() {
         return rank;
     }
+    public int compareWith(PieceType other) {
+    	if(other == BOMB) {
+    		if (this == MINER) {
+    			return 1;
+    		}
+    		else if(this == BOMB) {
+    			return 0;
+    		}
+    		else {
+    			return -1;
+    		}
+    	}
+    	return 0;
+    }
 }
