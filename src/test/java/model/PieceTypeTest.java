@@ -41,6 +41,7 @@ public class PieceTypeTest {
 	
 	@Test
 	public void testPieceFightRankBomb() {
+		//this.compareWITH(other )
 		assertTrue(PieceType.MINER.compareWith(PieceType.BOMB) == 1);
 		assertTrue(PieceType.SPY.compareWith(PieceType.BOMB) == -1);
 		assertTrue(PieceType.SERGEANT.compareWith(PieceType.BOMB) == -1);
@@ -50,7 +51,23 @@ public class PieceTypeTest {
 		assertTrue(PieceType.COLONEL.compareWith(PieceType.BOMB) == -1);
 		assertTrue(PieceType.GENERAL.compareWith(PieceType.BOMB) == -1);
 		assertTrue(PieceType.MARSHAL.compareWith(PieceType.BOMB) == -1);
-		assertTrue(PieceType.BOMB.compareWith(PieceType.BOMB) == 0);
+		assertTrue(PieceType.BOMB.compareWith(PieceType.BOMB) == -1);
 	}
 
+	@Test
+	public void testPieceFightRankMarshal() {
+		assertTrue(PieceType.MARSHAL.compareWith(PieceType.MINER) == 1);
+		assertTrue(PieceType.MARSHAL.compareWith(PieceType.CAPTAIN) == 1);
+		assertTrue(PieceType.MARSHAL.compareWith(PieceType.COLONEL) == 1);
+		assertTrue(PieceType.MARSHAL.compareWith(PieceType.FLAG) == 1);
+		assertTrue(PieceType.MARSHAL.compareWith(PieceType.GENERAL) == 1);
+		assertTrue(PieceType.MARSHAL.compareWith(PieceType.LIEUTENANT) == 1);
+		assertTrue(PieceType.MARSHAL.compareWith(PieceType.MAJOR) == 1);
+		assertTrue(PieceType.MARSHAL.compareWith(PieceType.SCOUT) == 1);
+		assertTrue(PieceType.MARSHAL.compareWith(PieceType.SERGEANT) == 1);
+		assertTrue(PieceType.MARSHAL.compareWith(PieceType.SPY) == 1);
+		assertTrue(PieceType.MARSHAL.compareWith(PieceType.MARSHAL) == 0);
+		assertTrue(PieceType.MARSHAL.compareWith(PieceType.BOMB) == -1);
+ 
+	}
 }

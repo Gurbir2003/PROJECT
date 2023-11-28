@@ -29,18 +29,33 @@ public enum PieceType {
     public int getRank() {
         return rank;
     }
+    
+    // -1 means loses
+    // 1 means wins
+    // 0 means draw both pieces die/ removed from the game
     public int compareWith(PieceType other) {
+    	if(other == FLAG) {
+    		return 1;
+    	}
     	if(other == BOMB) {
     		if (this == MINER) {
     			return 1;
-    		}
-    		else if(this == BOMB) {
-    			return 0;
     		}
     		else {
     			return -1;
     		}
     	}
+    	
+    	if(this == MARSHAL) {
+    		if (other == MARSHAL) {
+    			return 0;
+    		}
+    		else {
+    			return 1;	
+    		}
+    	}
+  
     	return 0;
+    	
     }
 }
