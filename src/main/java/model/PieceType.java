@@ -54,8 +54,19 @@ public enum PieceType {
     			return 1;	
     		}
     	}
-  
-    	return 0;
     	
+    	if(this == SPY) {
+    		if (other == MARSHAL ) {
+    			return 1;
+    		}
+    	}
+  
+    	if (this.rank>other.rank) {
+    		return 1;
+    	}
+    	else if (this.rank == other.rank) {
+    		return 0;
+    	}
+    	return -1;
     }
 }
