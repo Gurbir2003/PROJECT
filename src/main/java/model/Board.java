@@ -27,10 +27,25 @@ public class Board {
 		}
 	}
 	
-	public void displayBoard() {
+	public void displayLogicalBoard() {
 		for(int row=0; row<NUM_ROWS; row++) {
 			for(int col=0; col<NUM_COLS; col++) {
 				System.out.print(grid[row][col]);
+			}
+			System.out.println();
+		}
+	}
+	
+	public void displayPhysicalBoard() {
+		for(int row=0; row<NUM_ROWS; row++) {
+			for(int col=0; col<NUM_COLS; col++) {
+				if(grid[row][col].getPiece() == null) {
+					System.out.print("??? ");
+				}
+				else {
+					System.out.print(grid[row][col].getPiece().getPieceColor().getColor().charAt(0) + "" +
+									String.format("%02d", grid[row][col].getPiece().getPieceType().getRank()) + " ");
+				}
 			}
 			System.out.println();
 		}
@@ -61,4 +76,3 @@ public class Board {
 		return NUM_COLS;
 	}
 }
-
