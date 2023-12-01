@@ -70,4 +70,21 @@ public class PieceTypeTest {
 		assertTrue(PieceType.MARSHAL.compareWith(PieceType.BOMB) == -1);
  
 	}
+	
+	@Test
+	public void testPieceFightRankGeneral() {
+		assertTrue(PieceType.GENERAL.compareWith(PieceType.MINER) == 1);
+		assertTrue(PieceType.GENERAL.compareWith(PieceType.CAPTAIN) == 1);
+		assertTrue(PieceType.GENERAL.compareWith(PieceType.COLONEL) == 1);
+		assertTrue(PieceType.GENERAL.compareWith(PieceType.FLAG) == 1);
+		assertTrue(PieceType.GENERAL.compareWith(PieceType.GENERAL) == 0);
+		assertTrue(PieceType.GENERAL.compareWith(PieceType.LIEUTENANT) == 1);
+		assertTrue(PieceType.GENERAL.compareWith(PieceType.MAJOR) == 1);
+		assertTrue(PieceType.GENERAL.compareWith(PieceType.SCOUT) == 1);
+		assertTrue(PieceType.GENERAL.compareWith(PieceType.SERGEANT) == 1);
+		assertTrue(PieceType.GENERAL.compareWith(PieceType.SPY) == 1);
+		assertTrue(PieceType.GENERAL.compareWith(PieceType.MARSHAL) == -1);
+		assertTrue(PieceType.GENERAL.compareWith(PieceType.BOMB) == -1);
+ 
+	}
 }
