@@ -104,4 +104,21 @@ public class PieceTypeTest {
 		assertTrue(PieceType.COLONEL.compareWith(PieceType.BOMB) == -1);
  
 	}
+	
+	@Test
+	public void testPieceFightRankMajor() {
+		assertTrue(PieceType.MAJOR.compareWith(PieceType.MINER) == 1);
+		assertTrue(PieceType.MAJOR.compareWith(PieceType.CAPTAIN) == 1);
+		assertTrue(PieceType.MAJOR.compareWith(PieceType.COLONEL) == -1);
+		assertTrue(PieceType.MAJOR.compareWith(PieceType.FLAG) == 1);
+		assertTrue(PieceType.MAJOR.compareWith(PieceType.GENERAL) == -1);
+		assertTrue(PieceType.MAJOR.compareWith(PieceType.LIEUTENANT) == 1);
+		assertTrue(PieceType.MAJOR.compareWith(PieceType.MAJOR) == 0);
+		assertTrue(PieceType.MAJOR.compareWith(PieceType.SCOUT) == 1);
+		assertTrue(PieceType.MAJOR.compareWith(PieceType.SERGEANT) == 1);
+		assertTrue(PieceType.MAJOR.compareWith(PieceType.SPY) == 1);
+		assertTrue(PieceType.MAJOR.compareWith(PieceType.MARSHAL) == -1);
+		assertTrue(PieceType.MAJOR.compareWith(PieceType.BOMB) == -1);
+ 
+	}
 }
