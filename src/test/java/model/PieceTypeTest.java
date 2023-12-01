@@ -206,4 +206,34 @@ public class PieceTypeTest {
 		assertTrue(PieceType.SCOUT.compareWith(PieceType.BOMB) == -1);
  
 	}
+	
+	@Test
+	public void testPieceFightRankSpy() {
+		assertTrue(PieceType.SPY.compareWith(PieceType.MINER) == -1);
+		assertTrue(PieceType.SPY.compareWith(PieceType.CAPTAIN) == -1);
+		assertTrue(PieceType.SPY.compareWith(PieceType.COLONEL) == -1);
+		assertTrue(PieceType.SPY.compareWith(PieceType.FLAG) == 1);
+		assertTrue(PieceType.SPY.compareWith(PieceType.GENERAL) == -1);
+		assertTrue(PieceType.SPY.compareWith(PieceType.LIEUTENANT) == -1);
+		assertTrue(PieceType.SPY.compareWith(PieceType.MAJOR) == -1);
+		assertTrue(PieceType.SPY.compareWith(PieceType.SCOUT) == -1);
+		assertTrue(PieceType.SPY.compareWith(PieceType.SERGEANT) == -1);
+		assertTrue(PieceType.SPY.compareWith(PieceType.SPY) == 0);
+		assertTrue(PieceType.SPY.compareWith(PieceType.MARSHAL) == 1);
+		assertTrue(PieceType.SPY.compareWith(PieceType.BOMB) == -1);
+ 
+	}
+	
+	@Test
+	public void testPieceFightRankFlag() {
+		assertTrue(PieceType.MINER.compareWith(PieceType.FLAG) == 1);
+		assertTrue(PieceType.SPY.compareWith(PieceType.FLAG) == 1);
+		assertTrue(PieceType.SERGEANT.compareWith(PieceType.FLAG) == 1);
+		assertTrue(PieceType.LIEUTENANT.compareWith(PieceType.FLAG) == 1);
+		assertTrue(PieceType.CAPTAIN.compareWith(PieceType.FLAG) == 1);
+		assertTrue(PieceType.MAJOR.compareWith(PieceType.FLAG) == 1);
+		assertTrue(PieceType.COLONEL.compareWith(PieceType.FLAG) == 1);
+		assertTrue(PieceType.GENERAL.compareWith(PieceType.FLAG) == 1);
+		assertTrue(PieceType.MARSHAL.compareWith(PieceType.FLAG) == 1);
+	}
 }
