@@ -172,4 +172,38 @@ public class PieceTypeTest {
 		assertTrue(PieceType.SERGEANT.compareWith(PieceType.BOMB) == -1);
  
 	}
+	
+	@Test
+	public void testPieceFightRankMiner() {
+		assertTrue(PieceType.MINER.compareWith(PieceType.MINER) == 0);
+		assertTrue(PieceType.MINER.compareWith(PieceType.CAPTAIN) == -1);
+		assertTrue(PieceType.MINER.compareWith(PieceType.COLONEL) == -1);
+		assertTrue(PieceType.MINER.compareWith(PieceType.FLAG) == 1);
+		assertTrue(PieceType.MINER.compareWith(PieceType.GENERAL) == -1);
+		assertTrue(PieceType.MINER.compareWith(PieceType.LIEUTENANT) == -1);
+		assertTrue(PieceType.MINER.compareWith(PieceType.MAJOR) == -1);
+		assertTrue(PieceType.MINER.compareWith(PieceType.SCOUT) == 1);
+		assertTrue(PieceType.MINER.compareWith(PieceType.SERGEANT) == -1);
+		assertTrue(PieceType.MINER.compareWith(PieceType.SPY) == 1);
+		assertTrue(PieceType.MINER.compareWith(PieceType.MARSHAL) == -1);
+		assertTrue(PieceType.MINER.compareWith(PieceType.BOMB) == 1);
+ 
+	}
+	
+	@Test
+	public void testPieceFightRankScout() {
+		assertTrue(PieceType.SCOUT.compareWith(PieceType.MINER) == -1);
+		assertTrue(PieceType.SCOUT.compareWith(PieceType.CAPTAIN) == -1);
+		assertTrue(PieceType.SCOUT.compareWith(PieceType.COLONEL) == -1);
+		assertTrue(PieceType.SCOUT.compareWith(PieceType.FLAG) == 1);
+		assertTrue(PieceType.SCOUT.compareWith(PieceType.GENERAL) == -1);
+		assertTrue(PieceType.SCOUT.compareWith(PieceType.LIEUTENANT) == -1);
+		assertTrue(PieceType.SCOUT.compareWith(PieceType.MAJOR) == -1);
+		assertTrue(PieceType.SCOUT.compareWith(PieceType.SCOUT) == 0);
+		assertTrue(PieceType.SCOUT.compareWith(PieceType.SERGEANT) == -1);
+		assertTrue(PieceType.SCOUT.compareWith(PieceType.SPY) == 1);
+		assertTrue(PieceType.SCOUT.compareWith(PieceType.MARSHAL) == -1);
+		assertTrue(PieceType.SCOUT.compareWith(PieceType.BOMB) == -1);
+ 
+	}
 }
