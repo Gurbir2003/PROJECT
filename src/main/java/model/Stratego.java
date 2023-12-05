@@ -1,6 +1,10 @@
 package model;
 
 public class Stratego {
+	/**
+	 * 
+	 * @param args
+	 */
 	
 	public static void main(String[] args) {
 		 

@@ -1,5 +1,11 @@
 package model;
 
+/**
+ * The Board class represents the game board that will be used for the game(Stratego). The board consists of a grid of 10 x 10 squares
+ * where pieces can be placed. The board is initialised with grassy squares and four water squares in specific positions.
+ * It provides methods to display the logical and physical representation of the board, as well as to place a piece on the board.
+ *
+ */
 public class Board {
 	
 	private Square[][] grid;
