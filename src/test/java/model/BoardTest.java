@@ -13,7 +13,8 @@ public class BoardTest {
 	public void init() {
 		board = new Board();
 	}
-
+	
+	// Test for board initialisation
 	@Test
 	public void testBoardInitialisation() {
 		assertEquals(board.getNumRows(), 10);
@@ -24,6 +25,7 @@ public class BoardTest {
 		assertEquals(board.getBoard()[5][6].getType(), SquareType.WATER);
 	}
 	
+	// Test for board piece placement
 	@Test
 	public void testBoardPiecePlacement() {
 		Piece p = new Piece(PieceType.SPY, Color.RED);
