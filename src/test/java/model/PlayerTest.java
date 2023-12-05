@@ -14,6 +14,7 @@ public class PlayerTest {
 		p = new Player("Player 1", Color.RED);
 	}
 	
+	// Test for checking the amount of pieces per player are the same number as expected value
 	@Test
 	public void testPieceSetCreation() {
 		assertEquals(p.getPieceSet().get(PieceType.FLAG), 1);

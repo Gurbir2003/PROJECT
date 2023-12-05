@@ -6,7 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 public class PieceTypeTest {
-	
+
+	// Test for checking and verifying that the names of PieceTypes match their expected values
+
 	@Test
 	public void testPieceNames() {
 		assertEquals("Bomb", PieceType.BOMB.getName());
@@ -22,7 +24,8 @@ public class PieceTypeTest {
 		assertEquals("Marshal", PieceType.MARSHAL.getName());
 		assertEquals("Flag", PieceType.FLAG.getName());
 	}
-	
+
+	// Test for checking the rank of ePieceTypes match their expected values
 	@Test
 	public void testPieceRank() {
 		assertEquals(0, PieceType.BOMB.getRank());
@@ -39,6 +42,7 @@ public class PieceTypeTest {
 		assertEquals(11, PieceType.FLAG.getRank());
 	}
 	
+	// Test for checking the result of the Bomb PieceType against another PieceType 
 	@Test
 	public void testPieceFightRankBomb() {
 		//this.compareWITH(other )
@@ -54,6 +58,7 @@ public class PieceTypeTest {
 		assertTrue(PieceType.BOMB.compareWith(PieceType.BOMB) == -1);
 	}
 
+	// Test for checking the result of the Marshal PieceType against another PieceType 
 	@Test
 	public void testPieceFightRankMarshal() {
 		assertTrue(PieceType.MARSHAL.compareWith(PieceType.MINER) == 1);
@@ -71,6 +76,7 @@ public class PieceTypeTest {
  
 	}
 	
+	// Test for checking the result of the General PieceType against another PieceType 
 	@Test
 	public void testPieceFightRankGeneral() {
 		assertTrue(PieceType.GENERAL.compareWith(PieceType.MINER) == 1);
@@ -88,6 +94,7 @@ public class PieceTypeTest {
  
 	}
 	
+	// Test for checking the result of the Colonel PieceType against another PieceType 
 	@Test
 	public void testPieceFightRankColonel() {
 		assertTrue(PieceType.COLONEL.compareWith(PieceType.MINER) == 1);
@@ -105,6 +112,7 @@ public class PieceTypeTest {
  
 	}
 	
+	// Test for checking the result of the Major PieceType against another PieceType 
 	@Test
 	public void testPieceFightRankMajor() {
 		assertTrue(PieceType.MAJOR.compareWith(PieceType.MINER) == 1);
@@ -122,6 +130,7 @@ public class PieceTypeTest {
  
 	}
 	
+	// Test for checking the result of the Captain PieceType against another PieceType 
 	@Test
 	public void testPieceFightRankCaptain() {
 		assertTrue(PieceType.CAPTAIN.compareWith(PieceType.MINER) == 1);
@@ -139,6 +148,7 @@ public class PieceTypeTest {
  
 	}
 	
+	// Test for checking the result of the Lieutenant PieceType against another PieceType 
 	@Test
 	public void testPieceFightRankLieutenant() {
 		assertTrue(PieceType.LIEUTENANT.compareWith(PieceType.MINER) == 1);
@@ -156,6 +166,7 @@ public class PieceTypeTest {
  
 	}
 	
+	// Test for checking the result of the Sergeant PieceType against another PieceType 
 	@Test
 	public void testPieceFightRankSergeant() {
 		assertTrue(PieceType.SERGEANT.compareWith(PieceType.MINER) == 1);
@@ -173,6 +184,7 @@ public class PieceTypeTest {
  
 	}
 	
+	// Test for checking the result of the Miner PieceType against another PieceType 
 	@Test
 	public void testPieceFightRankMiner() {
 		assertTrue(PieceType.MINER.compareWith(PieceType.MINER) == 0);
@@ -190,6 +202,7 @@ public class PieceTypeTest {
  
 	}
 	
+	// Test for checking the result of the Scout PieceType against another PieceType 
 	@Test
 	public void testPieceFightRankScout() {
 		assertTrue(PieceType.SCOUT.compareWith(PieceType.MINER) == -1);
@@ -207,6 +220,7 @@ public class PieceTypeTest {
  
 	}
 	
+	// Test for checking the result of the Spy PieceType against another PieceType 
 	@Test
 	public void testPieceFightRankSpy() {
 		assertTrue(PieceType.SPY.compareWith(PieceType.MINER) == -1);
@@ -224,6 +238,7 @@ public class PieceTypeTest {
  
 	}
 	
+	// Test for checking the result of the Flag PieceType against another PieceType
 	@Test
 	public void testPieceFightRankFlag() {
 		assertTrue(PieceType.MINER.compareWith(PieceType.FLAG) == 1);
