@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Map;
+import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Game {
@@ -71,7 +72,42 @@ public class Game {
 
 	
 	public void play() {
-		
+		int turn = 1;
+		Scanner keyboard = new Scanner(System.in);
+		int start_square_number = -1;
+		String direction = "";
+		boolean moveValid = false;
+		while(true) {
+			start_square_number = -1;
+			direction = "";
+			moveValid = false;
+			board.displayPhysicalBoard();
+			while (start_square_number < 0 || start_square_number > 99) {
+				System.out.print("Please enter Square number to select a piece: ");
+				start_square_number = keyboard.nextInt();
+				int row = start_square_number/10;
+				int col = start_square_number%10;
+				if (board.hasFreeSquare(row, col)) {
+					while ((direction != "Left" || direction != "Right" ||
+							direction != "Up" || direction != "Down") && !moveValid) {
+						System.out.print("Please enter a Direction: Left, Right, Up, Down: ");
+						direction = keyboard.next();
+						moveValid = board.movePiece(row, col, direction);
+						if(moveValid) {
+							System.out.println("Move played successfully");
+						}
+						else {
+							System.out.println("Destination square is not valid, please try again");
+							direction = "";
+						}
+					}
+				}
+				else {
+					System.out.println("No valid square around, please try again");
+					start_square_number = -1;
+				}
+			}
+		}
 	}
 	
 	/**
