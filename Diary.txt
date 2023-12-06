@@ -44,3 +44,31 @@ testing it on a small helloworld.java project.
 
 19/10/2023 to 25/10/2023:
 - Drafting an initial design document, outlining expected functionalities and UI expectations.
+
+26/10/2023 to 1/11/2023:
+- Started working on tutorials on how to implement threads in java.
+
+2/11/2023/ to 3/11/2023: 
+- Day off (not overworking myself)
+
+4/11/2023 to 10/11/2023:
+- Did small project on threads and made progress on the report.
+
+11/11/2023 to 17/11/2023:
+- Did thread testing and did important commit on thread testing by learning how to create a timer for my game.
+
+17/11/2023 to 27/11/2023:
+- Did more research about my project and how to make it as efficient as possible using concurrency whilst making immense progress on the game logic implementation.
+
+28/11/2023 to 01/12/2023:
+- Implemented important classes such as pieceType, piece etc. and also did thorough testing for these classes for my game logic.
+
+02/12/2023 to 04/12/2023:
+- Made progress on the iterim report and finished off my presentation for the project.
+
+05/12/2023: 
+- Added more tests to do thorough testing.
+
+06/12/2023:
+- Implement movement for the pieces on the board.
+  
