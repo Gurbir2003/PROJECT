@@ -1,5 +1,10 @@
 package model;
 
+/**
+ * The Square class represents an individual square on the game board. Each square has a row, a column, a square type which is either grass or water, the square can also contain piece. 
+ * piece it contains. The Square class also allows to set a piece on the square and provides a textual representation for display purposes.
+ */
+
 public class Square {
 	
 	private int row;
