@@ -4,6 +4,12 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * The Game class is used to represent the main logic of the game.
+ * It is also used to set up the pieces on the board and use to initialise the players and assign them to a team using the createPlayers() method along with allowing the pieces to make movements on the board.
+ * 
+ *  */
+
 public class Game {
 	
 	private Player[] players;
