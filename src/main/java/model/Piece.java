@@ -1,5 +1,8 @@
 package model;
 
+/**
+ * The piece class is use to represent a piece on the board. A piece consists of pieceType(Spy,Scout,Miner...) and Color(either a blue or red team piece).
+ */
 public class Piece {
 	
 	private PieceType pieceType;
