@@ -1,5 +1,8 @@
 package model;
-
+/**
+ * The pieceType class is an enum type class and It is used to represent the type of piece on the board i.e. whether a piece is a bomb, spy, scout..etc. 
+ * @return the name,rank of the piece
+ */
 public enum PieceType {
 	
     BOMB("Bomb", 0),
