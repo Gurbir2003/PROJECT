@@ -3,6 +3,11 @@ package model;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+ * The player class is a class that is used to represent a player in the game.
+ * The class also initializes the player's piece set with the default pieces.
+ */
+
 public class Player {
 	
 	private String name;
