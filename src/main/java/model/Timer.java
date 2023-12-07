@@ -1,5 +1,10 @@
 package model;
 
+/**
+ * The timer class is used to represent a timer that will be used in the game. The class constructs a Timer with default initial values (0 hours, 0 minutes, 0 seconds) and assigns the given name.
+ * The timer class returns a string representation of the Timer in the format: "name: HH:MM:SS".
+ *
+ */
 // Singleton design pattern
 public class Timer implements Runnable{
 	
