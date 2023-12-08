@@ -2,7 +2,7 @@ package model;
 
 /**
  * The Board class represents the game board that will be used for the game(Stratego). The board consists of a grid of 10 x 10 squares where pieces can be placed.
- * The board is initialised with grassy squares and four water squares in specific positions.
+ * The board is initialised with grass squares and four water squares in specific positions.
  * It provides methods to display the logical and physical representation of the board, as well as to place a piece on the board.
  *
  */
@@ -17,6 +17,9 @@ public class Board {
 		initializeBoard();
 	}
 	
+	/**
+	 * Method that will the initialise the squares on the board without the pieces on them
+	 */
 	private void initializeBoard() {
 		for(int row=0; row<NUM_ROWS; row++) {
 			for(int col=0; col<NUM_COLS; col++) {
@@ -33,9 +36,14 @@ public class Board {
 		}
 	}
 	
-	public void displayLogicalBoard() {
+	
+	public void displayBoard() {
+		System.out.println("   0   1   2   3   4   5   6   7   8   9");
 		for(int row=0; row<NUM_ROWS; row++) {
 			for(int col=0; col<NUM_COLS; col++) {
+				if(col == 0) {
+					System.out.print(row + " ");
+				}
 				System.out.print(grid[row][col]);
 			}
 			System.out.println();
@@ -72,77 +80,121 @@ public class Board {
 	public void placePiece(int i, int j, Piece p) {
 		grid[i][j].setPiece(p); 
 	}
+	public boolean lookAround(int row, int col) {
+		if (this.hasFreeSquare(row, col, 1, 0) 
+				|| this.hasFreeSquare(row, col, -1, 0) 
+				|| this.hasFreeSquare(row, col, 0, 1) 
+				|| this.hasFreeSquare(row, col, 0, -1)) {
+			return true;
+		}
+		return false;
+	}
 	
-	
-	public boolean hasFreeSquare(int row, int col) {
+	private boolean hasFreeSquare(int row, int col, int offsetRow, int offsetCol ) {
 		// Can't select Water square
 		if (grid[row][col].getType() == SquareType.WATER ||
 			grid[row][col].getPiece() == null) {
 			return false;
 		}
-		// Look up
-		if (grid[row-1][col].getType() != SquareType.WATER && 
-				grid[row-1][col].getPiece() == null) {
-			return true;
+		
+		// Cannot go outside of boundaries of the game.
+		if(!isWithinBoundaries(row,col, offsetRow, offsetCol)) {
+			return false;
 		}
-		// Look down
-		if (grid[row+1][col].getType() != SquareType.WATER && 
-				grid[row+1][col].getPiece() == null) {
-			return true;
-		}
-		// Look left
-		if (grid[row][col-1].getType() != SquareType.WATER && 
-				grid[row][col-1].getPiece() == null) {
-			return true;
-		}
-		// Look right
-		if (grid[row][col+1].getType() != SquareType.WATER && 
-				grid[row][col+1].getPiece() == null) {
-			return true;
+		// Look around
+		if (grid[row+offsetRow][col+offsetCol].getType() != SquareType.WATER) {
+			if(grid[row+offsetRow][col+offsetCol].getPiece() == null) {
+				return true;
+			}
+			Piece p = grid[row][col].getPiece();
+			Piece otherPiece = grid[row+offsetRow][col+offsetCol].getPiece();
+			if (p.getPieceColor() != otherPiece.getPieceColor()) {
+				return true;
+			}
 		}
 		return false;
 	}
 	
 	public boolean movePiece(int row, int col, String direction) {
-		// Look up
-		if (direction.equals("Up") && 
-				grid[row-1][col].getType() != SquareType.WATER && 
-				grid[row-1][col].getPiece() == null) {
-			Piece p = grid[row][col].getPiece();
-			grid[row][col].setPiece(null);
-			grid[row-1][col].setPiece(p);
-			return true;
+		int[] offset = getDirectionOffset(direction);
+		int offsetRow = offset[0];
+		int offsetCol = offset[1];
+		
+		// Cannot go outside of boundaries of the game.
+		if(!isWithinBoundaries(row,col, offsetRow, offsetCol)) {
+			return false;
 		}
-		// Look down
-		if (direction.equals("Down") && 
-				grid[row+1][col].getType() != SquareType.WATER && 
-				grid[row+1][col].getPiece() == null) {
+		
+		//Check that position is not water
+		if (grid[row+offsetRow][col+offsetCol].getType() != SquareType.WATER) {
+			// check that position is free
+			if(grid[row+offsetRow][col+offsetCol].getPiece() == null) {
+				Piece p = grid[row][col].getPiece();
+				grid[row][col].setPiece(null);
+				grid[row+offsetRow][col+offsetCol].setPiece(p);
+				return true;
+			}
+			// check that position an enemy piece
 			Piece p = grid[row][col].getPiece();
-			grid[row][col].setPiece(null);
-			grid[row+1][col].setPiece(p);
-			return true;
+			Piece otherPiece = grid[row+offsetRow][col+offsetCol].getPiece();
+			if (p.getPieceColor() != otherPiece.getPieceColor()) {
+				//Attack system here
+				int result = p.attack(otherPiece);
+				if(result == 0) {
+					grid[row][col].setPiece(null);
+					grid[row+offsetRow][col+offsetCol].setPiece(null);
+				}
+				else if (result == -1) {
+					grid[row][col].setPiece(null);
+				}
+				else {
+					grid[row][col].setPiece(null);
+					grid[row+offsetRow][col+offsetCol].setPiece(p);
+				}
+				return true;
+			}
 		}
-		// Look left
-		if (direction.equals("Left") && 
-				grid[row][col-1].getType() != SquareType.WATER && 
-				grid[row][col-1].getPiece() == null) {
-			Piece p = grid[row][col].getPiece();
-			grid[row][col].setPiece(null);
-			grid[row][col-1].setPiece(p);
-			return true;
-		}
-		// Look right
-		if (direction.equals("Right") && 
-				grid[row][col+1].getType() != SquareType.WATER && 
-				grid[row][col+1].getPiece() == null) {
-			Piece p = grid[row][col].getPiece();
-			grid[row][col].setPiece(null);
-			grid[row][col+1].setPiece(p);
-			return true;
-		}
+		
+		
 		return false;
 	}
-
+	
+/**
+ * Function that return the offset couple (x,y) depending on the direction
+ * @param direction the direction the player wants to move
+ * @return the couple representing the offset to reach that direction
+ */
+	private int[] getDirectionOffset(String direction) {
+		if(direction.equals("Up")) {
+			int[] toReturn = {-1,0};
+			return toReturn;
+		}
+		if(direction.equals("Down")) {
+			int[] toReturn = {1,0};
+			return toReturn;
+		}
+		if(direction.equals("Left")) {
+			int[] toReturn = {0,-1};
+			return toReturn;
+		}
+		if(direction.equals("Right")) {
+			int[] toReturn = {0,1};
+			return toReturn;
+		}
+		return null;
+	}
+	
+	
+	private boolean isWithinBoundaries(int row, int col, int offsetRow, int offsetCol) {
+		if (row + offsetRow < 0 || row + offsetRow > 9) {
+			return false;
+		}
+		if (col + offsetCol < 0 || col + offsetCol > 9 ) {
+			return false;
+		}
+		return true;
+	}
+	
 	/**
 	 * @return the board
 	 */
