@@ -1,8 +1,9 @@
+Appendix: Diary
 01/10/2023:
-- Read and Researched the rules of Stratego and watched a game online (YouTube).
+- Read and Researched the rules of Stratego and watch a game online (YouTube).
 
 02/10/2023:
-- Tried to play my own stratego game to get used to the rule as well as the layout and characters movement.
+- Tried to play my own stratego game to get used to the rules as well as the layout and characters movement.
 
 03/10/2023:
 - Further improved my understanding of Stratego by reading some tips and tools about how to play it well and
@@ -33,8 +34,9 @@ testing it on a small helloworld.java project.
 15/10/2023:
 - Followed a Scenebuilder tutorial online to create a small project.
 
+
 16/10/2023:
-- Familiarised myself with the interface of scenebuilder.
+- Familiarise myself with the interface of scenebuilder.
 
 17/10/2023:
 - First UML class diagram draft.
@@ -52,23 +54,22 @@ testing it on a small helloworld.java project.
 - Day off (not overworking myself)
 
 4/11/2023 to 10/11/2023:
-- Did small project on threads and made progress on the report.
+- Did a small project on threads and made progress on the report.
 
-11/11/2023 to 17/11/2023:
-- Did thread testing and did important commit on thread testing by learning how to create a timer for my game.
+11/11/2023 to 13/11/2023:
+- Did thread testing and did an important commit on thread testing by learning how to create a timer for my game.
+
+14/11/2023 to 16/11/2023:
+Started writing JUnit tests using my basic classes from the UML Class Diagram (PieceType mostly).
 
 17/11/2023 to 27/11/2023:
-- Did more research about my project and how to make it as efficient as possible using concurrency whilst making immense progress on the game logic implementation.
+- Did more research about my project and how to make it as efficient as possible using concurrency whilst making progress on the game logic implementation (Board, Square, Player, Piece).
 
 28/11/2023 to 01/12/2023:
-- Implemented important classes such as pieceType, piece etc. and also did thorough testing for these classes for my game logic.
+- Improved the game logic with the use of more advanced OOP concepts such as enums to replace some of my classes (pieceType, SquareType, …) and also did thorough testing for these classes for my game logic.
 
 02/12/2023 to 04/12/2023:
-- Made progress on the iterim report and finished off my presentation for the project.
+- Made progress on the interim report and finished off my presentation for the project.
 
-05/12/2023: 
-- Added more tests to do thorough testing.
-
-06/12/2023:
-- Implement movement for the pieces on the board.
-  
+05/12/2023 to 07/12/2023:
+- Implement movement and ability to attack for the pieces on the board.
