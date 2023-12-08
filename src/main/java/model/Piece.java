@@ -12,6 +12,10 @@ public class Piece {
 		this.pieceType = pt;
 		this.pieceColor = c;
 	}
+	
+	public int attack(Piece otherPiece) {
+		return this.pieceType.compareWith(otherPiece.pieceType);
+	}
 
 	/**
 	 * @return the pieceType

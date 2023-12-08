@@ -57,10 +57,14 @@ public class Square {
 	
 	public String toString() {
 		if (this.type == SquareType.WATER) {
-			return "[##]";
+			return "WWW ";
+		}
+		else if (this.piece == null ) {
+			return "### ";
 		}
 		else {
-			return "[" + row + "" + col + "]";
+			return  piece.getPieceColor().getColor().charAt(0) + "" 
+					+ String.format("%02d", piece.getPieceType().getRank()) + " ";
 		}
 	}
 }
