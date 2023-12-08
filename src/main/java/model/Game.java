@@ -29,12 +29,16 @@ public class Game {
 		players[0] = p1;
 		players[1] = p2;
 	}
-
+/**
+ * In setUpBoardPieces() both player will be able to initialise their pieces at the same time with use of threads.
+ */
 	private void setUpBoardPieces() {
 		for(Player p: players) {
 			Thread thread = new Thread(new Runnable() {
 				Player player = p;
-
+				/**
+				 * The run method will be launched by each thread to initialise the current player pieces randomly. The run method is run twice once for each player at the same time. 
+				 */
 				@Override
 				public void run() {
 					System.out.println("Thread starting for player " + p.getTeamColor().getColor());
@@ -76,7 +80,9 @@ public class Game {
 		}
 	}
 
-	
+/**
+ * 	
+ */
 	public void play() {
 		int turn = 1;
 		Scanner keyboard = new Scanner(System.in);
@@ -87,13 +93,14 @@ public class Game {
 			start_square_number = -1;
 			direction = "";
 			moveValid = false;
-			board.displayPhysicalBoard();
+			board.displayBoard();
 			while (start_square_number < 0 || start_square_number > 99) {
 				System.out.print("Please enter Square number to select a piece: ");
 				start_square_number = keyboard.nextInt();
 				int row = start_square_number/10;
 				int col = start_square_number%10;
-				if (board.hasFreeSquare(row, col)) {
+				System.out.println("(" + row + "," + col + ")");
+				if (board.lookAround(row, col)) {
 					while ((direction != "Left" || direction != "Right" ||
 							direction != "Up" || direction != "Down") && !moveValid) {
 						System.out.print("Please enter a Direction: Left, Right, Up, Down: ");
@@ -101,6 +108,7 @@ public class Game {
 						moveValid = board.movePiece(row, col, direction);
 						if(moveValid) {
 							System.out.println("Move played successfully");
+							turn = turn + 1;
 						}
 						else {
 							System.out.println("Destination square is not valid, please try again");
@@ -122,4 +130,16 @@ public class Game {
 	public Board getBoard() {
 		return board;
 	}
+	
+	/**
+	 * Left to do:
+	 * Only current player can move their own pieces
+	 * Display who won a battle
+	 * Stop the game when flag captured
+	 * Bomb and flag cannot move
+	 * Scout can move more than one square
+	 * User friendly improvement (optional):
+	 * Display available pieces before selecting one
+	 * Display available direction after selecting a piece
+	 */
 }
