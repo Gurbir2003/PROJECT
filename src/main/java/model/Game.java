@@ -12,7 +12,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Game {
 	
-	private Player[] players;
+	private Player[] players; // Red is P1, Blue is P2
 	private Board board;
 	
 	public Game() {
@@ -24,21 +24,17 @@ public class Game {
 	
 	private void createPlayers() {
 		// Replace following code with asking player name;
-		Player p1 = new Player("Player 1", Color.RED);
-		Player p2 = new Player("Player 2", Color.BLUE);
+		Player p1 = new Player("Red", Color.RED);
+		Player p2 = new Player("Blue", Color.BLUE);
 		players[0] = p1;
 		players[1] = p2;
 	}
-/**
- * In setUpBoardPieces() both player will be able to initialise their pieces at the same time with use of threads.
- */
+
 	private void setUpBoardPieces() {
 		for(Player p: players) {
 			Thread thread = new Thread(new Runnable() {
 				Player player = p;
-				/**
-				 * The run method will be launched by each thread to initialise the current player pieces randomly. The run method is run twice once for each player at the same time. 
-				 */
+
 				@Override
 				public void run() {
 					System.out.println("Thread starting for player " + p.getTeamColor().getColor());
@@ -80,49 +76,114 @@ public class Game {
 		}
 	}
 
-/**
- * 	
- */
+	
 	public void play() {
-		int turn = 1;
+		int turn = 0;
+		while(true) {
+			if (turn%2 == 0) { // P1 turns
+				playerMove(players[0]);
+			}
+			else { // P2 turns
+				playerMove(players[1]);
+			}
+			turn++;
+		}
+		/*turn--;
+		if (turn%2 == 0) {
+			System.out.println("Player " + players[0].getName() + " won the game.");
+		}
+		else {
+			System.out.println("Player " + players[1].getName() + " won the game.");
+		}*/
+	}
+	
+	private void playerMove(Player currentPlayer) {
+		board.displayBoard();
+		selectSquareAndMove(currentPlayer);
+	}
+	
+	
+	private void selectSquareAndMove(Player currentPlayer) {
+		int square_number;
 		Scanner keyboard = new Scanner(System.in);
-		int start_square_number = -1;
+		System.out.println("Player's " + currentPlayer.getName() + " turn.");
+		do {
+			System.out.print("Please enter Square number to select a piece: ");
+			square_number = keyboard.nextInt();
+			int row = square_number/10;
+			int col = square_number%10;
+			System.out.println("(" + row + ", " + col + ")");
+			if ((row > 9 || row < 0) || (col > 9 || col < 0)) {
+				System.out.println("Invalid row or column number. Please try again");
+				square_number = -1;
+			}
+			else if (board.getBoard()[row][col].getPiece().getPieceType().equals(PieceType.BOMB) || 
+					 board.getBoard()[row][col].getPiece().getPieceType().equals(PieceType.FLAG)) {
+				System.out.println("Invalid Piece selected. You cannot move a " + 
+					 board.getBoard()[row][col].getPiece().getPieceType());
+				square_number = -1;
+			}
+			else if (board.lookAround(row,  col) && board.getBoard()[row][col].getPiece().getPieceColor().compareTo(currentPlayer.getTeamColor()) == 0) {
+				selectDirection(keyboard, row, col);
+			}
+			else if (!board.lookAround(row, col)) {
+				System.out.println("Invalid square or no valid square around, please try again");
+				square_number = -1;
+			}
+			else {
+				System.out.println("This piece doesn't belong to the current player. Please try again.");
+				square_number = -1;
+			}
+		} while (square_number < 0 || square_number > 99);
+	}
+	
+	
+	private void selectDirection(Scanner keyboard, int row, int col) {
 		String direction = "";
 		boolean moveValid = false;
-		while(true) {
-			start_square_number = -1;
-			direction = "";
-			moveValid = false;
-			board.displayBoard();
-			while (start_square_number < 0 || start_square_number > 99) {
-				System.out.print("Please enter Square number to select a piece: ");
-				start_square_number = keyboard.nextInt();
-				int row = start_square_number/10;
-				int col = start_square_number%10;
-				System.out.println("(" + row + "," + col + ")");
-				if (board.lookAround(row, col)) {
-					while ((direction != "Left" || direction != "Right" ||
-							direction != "Up" || direction != "Down") && !moveValid) {
-						System.out.print("Please enter a Direction: Left, Right, Up, Down: ");
-						direction = keyboard.next();
-						moveValid = board.movePiece(row, col, direction);
-						if(moveValid) {
-							System.out.println("Move played successfully");
-							turn = turn + 1;
+		do  {
+			System.out.print("Please enter a Direction: Left, Right, Up, Down: ");
+			direction = keyboard.next();
+			moveValid = board.movePiece(row, col, direction);
+			if(!moveValid) {
+				direction = "";
+			}
+		} while (!isValidDirection(direction) && !moveValid);
+	}
+	
+	
+	private boolean isValidDirection(String direction) {
+		return direction.equalsIgnoreCase("left") || direction.equalsIgnoreCase("right") || 
+				direction.equalsIgnoreCase("up") || direction.equalsIgnoreCase("down") ||
+				direction.equalsIgnoreCase("l") || direction.equalsIgnoreCase("r") || 
+				direction.equalsIgnoreCase("u") || direction.equalsIgnoreCase("d");
+	}
+	
+	/*
+	private boolean isWon() {
+		boolean blueWon = true;
+		boolean redWon = true;
+		Square[][] grid = board.getBoard();
+		for(Square[] row: grid) {
+			for(Square cell: row) {
+				if(!cell.getType().equals(SquareType.WATER) && !cell.getType().equals(SquareType.GRASS)) {
+					if (cell.getPiece().getPieceType().equals(PieceType.FLAG)) {
+						if (cell.getPiece().getPieceColor().equals(Color.RED)) {
+							blueWon = false;
 						}
 						else {
-							System.out.println("Destination square is not valid, please try again");
-							direction = "";
+							redWon = false;
 						}
 					}
-				}
-				else {
-					System.out.println("No valid square around, please try again");
-					start_square_number = -1;
-				}
+				}	
 			}
 		}
+		if (!blueWon && !redWon) {
+			return false;
+		}
+		return true;
 	}
+	*/
 	
 	/**
 	 * @return the board
@@ -130,16 +191,5 @@ public class Game {
 	public Board getBoard() {
 		return board;
 	}
-	
-	/**
-	 * Left to do:
-	 * Only current player can move their own pieces
-	 * Display who won a battle
-	 * Stop the game when flag captured
-	 * Bomb and flag cannot move
-	 * Scout can move more than one square
-	 * User friendly improvement (optional):
-	 * Display available pieces before selecting one
-	 * Display available direction after selecting a piece
-	 */
 }
+
