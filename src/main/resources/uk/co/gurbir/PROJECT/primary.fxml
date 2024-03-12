@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <center>
@@ -40,7 +41,14 @@
    <right>
       <VBox prefHeight="800.0" prefWidth="360.0">
          <children>
-            <HBox focusTraversable="true" prefHeight="80.0" prefWidth="360.0" />
+            <HBox alignment="CENTER" focusTraversable="true" prefHeight="80.0" prefWidth="360.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="STRATEGO" textAlignment="CENTER">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+               </children></HBox>
          </children>
       </VBox>
    </right>
