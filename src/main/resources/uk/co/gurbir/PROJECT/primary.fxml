@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <GridPane gridLinesVisible="true" prefHeight="800.0" prefWidth="896.0" BorderPane.alignment="CENTER">
@@ -39,16 +40,35 @@
       </GridPane>
    </center>
    <right>
-      <VBox prefHeight="800.0" prefWidth="360.0">
+      <VBox prefHeight="800.0" prefWidth="360.0" style="-fx-background-color: #4682B4;">
          <children>
-            <HBox alignment="CENTER" focusTraversable="true" prefHeight="80.0" prefWidth="360.0">
+            <HBox alignment="CENTER" focusTraversable="true" prefHeight="40.0" prefWidth="360.0" style="-fx-background-color: #00008B;">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" text="STRATEGO" textAlignment="CENTER">
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="324.0" text="S T R A T E G O" textAlignment="CENTER" textFill="#edf50c">
                      <font>
-                        <Font size="30.0" />
+                        <Font name="Georgia Bold Italic" size="40.0" />
                      </font>
                   </Label>
                </children></HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="160.0" prefWidth="360.0" spacing="10" style="-fx-background-color: #646464; -fx-padding: 10;">
+    <VBox spacing="5" />
+               <Label alignment="TOP_CENTER" prefHeight="42.0" prefWidth="110.0" style="-fx-background-color: #BBBBBB; -fx-border-color: #2B2B2B; -fx-padding: 5 10; -fx-text-fill: black;" text="Sergeant" textAlignment="CENTER">
+                  <font>
+                     <Font name="Georgia" size="20.0" />
+                  </font>
+               </Label>
+               <Label alignment="CENTER" prefHeight="42.0" prefWidth="110.0" style="-fx-background-color: #BBBBBB; -fx-border-color: #2B2B2B; -fx-padding: 5 10; -fx-text-fill: black;" text="Sergeant" textAlignment="CENTER">
+                  <font>
+                     <Font name="Georgia" size="20.0" />
+                  </font>
+               </Label>
+               <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="42.0" prefWidth="110.0" style="-fx-background-color: #BBBBBB; -fx-border-color: #2B2B2B; -fx-padding: 5 10; -fx-text-fill: black;" text="Sergeant" textAlignment="CENTER">
+                  <font>
+                     <Font name="Georgia" size="20.0" />
+                  </font>
+               </Label>
+</HBox>
+
          </children>
       </VBox>
    </right>
