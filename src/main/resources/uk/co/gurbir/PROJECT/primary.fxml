@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -9,9 +16,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1200.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <GridPane gridLinesVisible="true" prefHeight="800.0" prefWidth="896.0" BorderPane.alignment="CENTER">
+      <GridPane prefHeight="1000.0" prefWidth="1000.0" styleClass="map-background" stylesheets="@css/style.css" BorderPane.alignment="CENTER">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -39,54 +46,244 @@
       </GridPane>
    </center>
    <right>
-      <VBox prefHeight="800.0" prefWidth="360.0" style="-fx-background-color: #4682B4;">
+      <VBox prefHeight="1000.0" prefWidth="400.0" style="-fx-background-color: #4682B4;">
          <children>
             <HBox alignment="CENTER" focusTraversable="true" prefHeight="40.0" prefWidth="360.0" style="-fx-background-color: #00008B;">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="324.0" text="S T R A T E G O" textAlignment="CENTER" textFill="#edf50c">
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="324.0" text="S T R A T E G O" textAlignment="CENTER" textFill="#edf50c">
                      <font>
                         <Font name="Georgia Bold Italic" size="40.0" />
                      </font>
                   </Label>
                </children></HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="82.0" prefWidth="360.0" spacing="10" style="-fx-background-color: #646464; -fx-padding: 25;">
-               <Label alignment="TOP_CENTER" prefHeight="42.0" prefWidth="153.0" style="-fx-background-color: #BBBBBB; -fx-border-color: #2B2B2B; -fx-padding: 5 10; -fx-text-fill: black;" text="Sergeant" textAlignment="CENTER">
-                  <font>
-                     <Font name="Georgia Bold" size="25.0" />
-                  </font>
-               </Label>
-               <Label alignment="CENTER" prefHeight="42.0" prefWidth="67.0" style="-fx-background-color: #BBBBBB; -fx-border-color: #2B2B2B; -fx-padding: 5 10; -fx-text-fill: black;" text="100" textAlignment="CENTER">
-                  <font>
-                     <Font name="Georgia Bold" size="23.0" />
-                  </font>
-               </Label>
-               <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="42.0" prefWidth="63.0" style="-fx-background-color: #BBBBBB; -fx-border-color: #2B2B2B; -fx-padding: 5 10; -fx-text-fill: black;" textAlignment="CENTER">
-                  <font>
-                     <Font name="Georgia" size="20.0" />
-                  </font>
-               </Label>
-</HBox>
-            <HBox prefHeight="35.0" prefWidth="360.0" style="-fx-background-color: #646464; -fx-padding: 20; -fx-spacing: 20;">
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="360.0" spacing="10" style="-fx-background-color: #646464; -fx-padding: 25;">
                <children>
-                  <Label alignment="TOP_CENTER" prefHeight="22.0" prefWidth="50.0" style="-fx-background-color: #BBBBBB; -fx-border-color: #2B2B2B; -fx-padding: 5 10; -fx-text-fill: black;" text="Rank" textAlignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="60.0" prefWidth="385.0" text="TIMER">
                      <font>
-                        <Font name="Georgia Bold" size="8.0" />
+                        <Font size="36.0" />
                      </font>
                   </Label>
-                  <Label alignment="TOP_CENTER" prefHeight="22.0" prefWidth="50.0" style="-fx-background-color: #BBBBBB; -fx-border-color: #2B2B2B; -fx-padding: 5 10; -fx-text-fill: black;" text="Turn" textAlignment="CENTER">
+               </children>
+</HBox>
+            <HBox prefHeight="40.0" prefWidth="360.0" style="-fx-background-color: #646464; -fx-padding: 20; -fx-spacing: 20;">
+               <children>
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="180.0" text="RED PIECE LEFT">
                      <font>
-                        <Font name="Georgia Bold" size="8.0" />
+                        <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="TOP_CENTER" prefHeight="22.0" prefWidth="65.0" style="-fx-background-color: #BBBBBB; -fx-border-color: #2B2B2B; -fx-padding: 5 10; -fx-text-fill: black;" text="Campgain" textAlignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="180.0" text="BLUE PIECE LEFT">
                      <font>
-                        <Font name="Georgia Bold" size="8.0" />
+                        <Font size="18.0" />
                      </font>
                   </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ListView prefHeight="200.0" prefWidth="200.0" />
+                  <ListView prefHeight="200.0" prefWidth="200.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ListView prefHeight="200.0" prefWidth="200.0" />
+                  <ListView prefHeight="200.0" prefWidth="200.0" />
+               </children>
+            </HBox>
+            <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="400.0" prefWidth="200.0">
+               <children>
+                  <ScrollBar orientation="VERTICAL" />
+                  <ListView prefHeight="400.0" prefWidth="400.0" />
                </children>
             </HBox>
 
          </children>
       </VBox>
    </right>
+   <left>
+      <VBox prefHeight="200.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="75.0" prefWidth="200.0">
+               <children>
+                  <Label text="1">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/Marshal.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="75.0" prefWidth="200.0">
+               <children>
+                  <Label text="1">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/General.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="85.0" prefHeight="75.0" prefWidth="200.0">
+               <children>
+                  <Label text="2">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/General.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="85.0" prefHeight="75.0" prefWidth="200.0">
+               <children>
+                  <Label text="2">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/General.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="85.0" prefHeight="75.0" prefWidth="200.0">
+               <children>
+                  <Label text="2">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/General.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="310.0" prefHeight="75.0" prefWidth="200.0">
+               <children>
+                  <Label text="2">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/General.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="385.0" prefHeight="75.0" prefWidth="200.0">
+               <children>
+                  <Label text="2">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/General.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="385.0" prefHeight="75.0" prefWidth="200.0">
+               <children>
+                  <Label text="2">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/General.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="460.0" prefHeight="75.0" prefWidth="200.0">
+               <children>
+                  <Label text="2">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/General.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="460.0" prefHeight="75.0" prefWidth="200.0">
+               <children>
+                  <Label text="2">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/General.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="385.0" prefHeight="75.0" prefWidth="200.0">
+               <children>
+                  <Label text="2">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/General.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <Label prefHeight="174.0" prefWidth="153.0" text="Label" />
+         </children>
+      </VBox>
+   </left>
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <bottom>
+      <HBox prefHeight="175.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>
