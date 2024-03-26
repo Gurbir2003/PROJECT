@@ -1,1 +1,12 @@
+.grid-style {
+  -fx-background-color: linear-gradient(to bottom, #f8eec7, #d7ae60);
+  -fx-padding: -1; /* This is to ensure the grid lines touch each other */
+  -fx-hgap: 2; /* Horizontal gap */
+  -fx-vgap: 2; /* Vertical gap */
+}
 
+.grid-style .grid-lines {
+  -fx-border-color: #806c50 #fff3e0 #fff3e0 #806c50;
+  -fx-border-width: 1;
+  -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 1);
+}
