@@ -1,10 +1,5 @@
 package model;
 
-/**
- * The timer class is used to represent a timer that will be used in the game. The class constructs a Timer with default initial values (0 hours, 0 minutes, 0 seconds) and assigns the given name.
- * The timer class returns a string representation of the Timer in the format: "name: HH:MM:SS".
- *
- */
 // Singleton design pattern
 public class Timer implements Runnable{
 	
@@ -16,16 +11,16 @@ public class Timer implements Runnable{
 	
 	// Constructor
 	public Timer(int h, int m, int s) {
-		this.hours = h;
-		this.minutes = m;
-		this.seconds = s;
+		this.setHours(h);
+		this.setMinutes(m);
+		this.setSeconds(s);
 	}
 	
 	// Default Constructor
 	public Timer(String name) {
-		this.hours = 0;
-		this.minutes = 0;
-		this.seconds = 0;
+		this.setHours(0);
+		this.setMinutes(0);
+		this.setSeconds(0);
 		this.name = name;
 	}
 	
@@ -34,13 +29,13 @@ public class Timer implements Runnable{
 		System.out.println("Thread started...");
 		try {
 			while(true) {
-				seconds += 1;
-				if (seconds == 60) {
-					seconds = 0;
-					minutes += 1;
-					if (minutes == 60) {
-						minutes = 0;
-						hours += 1;
+				setSeconds(getSeconds() + 1);
+				if (getSeconds() == 60) {
+					setSeconds(0);
+					setMinutes(getMinutes() + 1);
+					if (getMinutes() == 60) {
+						setMinutes(0);
+						setHours(getHours() + 1);
 					}
 				}
 				System.out.println(this); // Use toString to print the timer
@@ -53,7 +48,32 @@ public class Timer implements Runnable{
 	}
 	
 	public String toString() {
-		String str = String.format(name + ": %02d:%02d:%02d", hours, minutes, seconds);
+		String str = String.format("%02d:%02d:%02d", getHours(), getMinutes(), getSeconds());
 		return str;
 	}
+
+	public int getSeconds() {
+		return seconds;
+	}
+
+	public void setSeconds(int seconds) {
+		this.seconds = seconds;
+	}
+
+	public int getMinutes() {
+		return minutes;
+	}
+
+	public void setMinutes(int minutes) {
+		this.minutes = minutes;
+	}
+
+	public int getHours() {
+		return hours;
+	}
+
+	public void setHours(int hours) {
+		this.hours = hours;
+	}
 }
+
