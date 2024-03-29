@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollBar?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -17,43 +17,43 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1200.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <GridPane fx:id="map_grid_pane" gridLinesVisible="true" prefHeight="1000.0" prefWidth="1000.0" style="-fx-background-color: linear-gradient(to bottom, #f8eec7, #d7ae60);" styleClass="grid-style" BorderPane.alignment="CENTER">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <GridPane fx:id="map_grid_pane" gridLinesVisible="true" prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to bottom, #f8eec7, #d7ae60);" styleClass="grid-style" BorderPane.alignment="CENTER">
+       	<columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="60.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="60.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="60.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="60.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="60.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="60.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="60.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="60.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="60.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="60.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
    </center>
    <right>
-      <VBox prefHeight="1000.0" prefWidth="400.0" style="-fx-background-color: #4682B4;">
+      <VBox prefHeight="800.0" prefWidth="400.0" style="-fx-background-color: #4682B4;">
          <children>
-            <HBox alignment="CENTER" focusTraversable="true" prefHeight="40.0" prefWidth="360.0" style="-fx-background-color: linear-gradient(to bottom, #f8eec7, #d7ae60);">
+            <HBox alignment="CENTER" focusTraversable="true" prefHeight="60.0" prefWidth="480.0" style="-fx-background-color: linear-gradient(to bottom, #f8eec7, #d7ae60);">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="324.0" text="S T R A T E G O" textAlignment="CENTER">
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="464.0" text="S T R A T E G O" textAlignment="CENTER">
                      <font>
-                        <Font name="Georgia Bold Italic" size="40.0" />
+                        <Font name="Georgia Bold Italic" size="24.0" />
                      </font>
                   </Label>
                </children></HBox>
@@ -112,9 +112,14 @@
       </VBox>
    </right>
    <left>
-      <VBox prefHeight="200.0" prefWidth="150.0" style="-fx-background-color: linear-gradient(to bottom, #f8eec7, #d7ae60);" BorderPane.alignment="CENTER">
+      <VBox prefHeight="800.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(to bottom, #f8eec7, #d7ae60);" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" prefHeight="75.0" prefWidth="200.0">
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="199.0" text="Amount: Piece number" textAlignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="70.0" prefWidth="200.0">
                <children>
                   <Label text="1">
                      <font>
@@ -127,8 +132,11 @@
                      </image>
                   </ImageView>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="75.0" prefWidth="200.0">
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="70.0" prefWidth="200.0">
                <children>
                   <Label text="1">
                      <font>
@@ -141,8 +149,11 @@
                      </image>
                   </ImageView>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="85.0" prefHeight="75.0" prefWidth="200.0">
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="85.0" prefHeight="70.0" prefWidth="200.0">
                <children>
                   <Label text="2">
                      <font>
@@ -155,8 +166,11 @@
                      </image>
                   </ImageView>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="85.0" prefHeight="75.0" prefWidth="200.0">
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="85.0" prefHeight="70.0" prefWidth="200.0">
                <children>
                   <Label text="3">
                      <font>
@@ -169,8 +183,11 @@
                      </image>
                   </ImageView>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="85.0" prefHeight="75.0" prefWidth="200.0">
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="85.0" prefHeight="70.0" prefWidth="200.0">
                <children>
                   <Label text="4">
                      <font>
@@ -183,8 +200,11 @@
                      </image>
                   </ImageView>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="310.0" prefHeight="75.0" prefWidth="200.0">
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="310.0" prefHeight="70.0" prefWidth="200.0">
                <children>
                   <Label text="4">
                      <font>
@@ -197,8 +217,11 @@
                      </image>
                   </ImageView>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="385.0" prefHeight="75.0" prefWidth="200.0">
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="385.0" prefHeight="70.0" prefWidth="200.0">
                <children>
                   <Label text="4">
                      <font>
@@ -211,8 +234,11 @@
                      </image>
                   </ImageView>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="385.0" prefHeight="75.0" prefWidth="200.0">
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="385.0" prefHeight="70.0" prefWidth="200.0">
                <children>
                   <Label text="5">
                      <font>
@@ -225,8 +251,11 @@
                      </image>
                   </ImageView>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="460.0" prefHeight="75.0" prefWidth="200.0">
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="460.0" prefHeight="70.0" prefWidth="200.0">
                <children>
                   <Label text="8">
                      <font>
@@ -239,8 +268,11 @@
                      </image>
                   </ImageView>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="460.0" prefHeight="75.0" prefWidth="200.0">
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="460.0" prefHeight="70.0" prefWidth="200.0">
                <children>
                   <Label text="1">
                      <font>
@@ -253,8 +285,11 @@
                      </image>
                   </ImageView>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="385.0" prefHeight="75.0" prefWidth="200.0">
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="385.0" prefHeight="70.0" prefWidth="200.0">
                <children>
                   <Label text="6">
                      <font>
@@ -267,12 +302,10 @@
                      </image>
                   </ImageView>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
-            <TextArea prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(to bottom, #f8eec7, #d7ae60);" text="CAPTURE THE ENEMY FLAG!!&#10;RANKS(WHO KILLS WHO):&#10;MARSHAL: DEFEATS ALL&#10;GENERAL: DEFEATS LOWER&#10;COLONELS: KILLS MAJOR &amp; BELOW&#10;MAJOR: KILLS CAPTAIN &amp; BELOW&#10;CAPTAIN: KILLS LIEUTENANT &amp; BELOW&#10;LIEUTENANT: KILLS SERGEANT &amp; BELOW&#10;SERGEANT: KILLS MINER &amp; BELOW&#10;MINER: DEFUSES BOMB, KILLS SCOUT &amp; SPY&#10;SCOUT: KILLS SPY, MOVES ANY DIST&#10;SPY: KILLS MARSHAL (IF ATTACKING)&#10;BOMB: KILLS ATTACKERS EXCEPT MINER&#10;FLAG: CAPTURE WINS">
-               <font>
-                  <Font name="Times New Roman Bold" size="10.0" />
-               </font>
-            </TextArea>
          </children>
       </VBox>
    </left>
@@ -298,213 +331,333 @@
       </MenuBar>
    </top>
    <bottom>
-      <VBox BorderPane.alignment="CENTER">
+      <VBox prefHeight="180.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #d7ae60;">
+            <HBox alignment="CENTER" prefHeight="90.0" prefWidth="200.0" style="-fx-background-color: #d7ae60;" VBox.vgrow="NEVER">
                <children>
-                  <ImageView fx:id="B10_image_view" fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B10_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/B10.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="-8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B9_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/B9.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="-8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B8_1_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/B8.PNG" />
+                        <Image url="@images/B8.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="-8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B8_2_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/B8.PNG" />
+                        <Image url="@images/B8.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="-8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B7_1_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/B7.PNG" />
+                        <Image url="@images/B7.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="-8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B7_2_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/B7.PNG" />
+                        <Image url="@images/B7.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="-8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B7_3_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/B7.PNG" />
+                        <Image url="@images/B7.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="-8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B6_1_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/B6.PNG" />
+                        <Image url="@images/B6.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="-8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B6_2_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/B6.PNG" />
+                        <Image url="@images/B6.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="-8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B6_3_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/B6.PNG" />
+                        <Image url="@images/B6.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="-8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B6_4_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/B6.PNG" />
+                        <Image url="@images/B6.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="-8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B5_1_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/B5.PNG" />
+                        <Image url="@images/B5.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="-8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B5_2_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/B5.PNG" />
+                        <Image url="@images/B5.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="-8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B5_3_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/B5.PNG" />
+                        <Image url="@images/B5.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="-8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B5_4_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/B5.PNG" />
+                        <Image url="@images/B5.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="-8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B4_1_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/B4.PNG" />
+                        <Image url="@images/B4.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="-8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B4_2_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/B4.PNG" />
+                        <Image url="@images/B4.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="-8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B4_3_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/B4.PNG" />
+                        <Image url="@images/B4.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="-8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B4_4_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/B4.PNG" />
+                        <Image url="@images/B4.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="-8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B3_1_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/B3.PNG" />
+                        <Image url="@images/B3.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="-8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #d7ae60;">
+            <HBox alignment="CENTER" prefHeight="90.0" prefWidth="200.0" style="-fx-background-color: #d7ae60;" VBox.vgrow="NEVER">
                <children>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B3_2_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/B3.PNG" />
+                        <Image url="@images/B3.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B3_3_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/B3.PNG" />
+                        <Image url="@images/B3.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B3_4_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/B3.PNG" />
+                        <Image url="@images/B3.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B3_5_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/B3.PNG" />
+                        <Image url="@images/B3.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B2_1_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/B2.PNG" />
+                        <Image url="@images/B2.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B2_2_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/B2.PNG" />
+                        <Image url="@images/B2.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B2_3_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/B2.PNG" />
+                        <Image url="@images/B2.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B2_4_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/B2.PNG" />
+                        <Image url="@images/B2.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B2_5_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/B2.PNG" />
+                        <Image url="@images/B2.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B2_6_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/B2.PNG" />
+                        <Image url="@images/B2.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B2_7_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/B2.PNG" />
+                        <Image url="@images/B2.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B2_8_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/B2.PNG" />
+                        <Image url="@images/B2.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="BS_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/BS.PNG" />
+                        <Image url="@images/BS.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="BB_1_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/BB.PNG" />
+                        <Image url="@images/BB.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="BB_2_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/BB.PNG" />
+                        <Image url="@images/BB.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="BB_3_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/BB.PNG" />
+                        <Image url="@images/BB.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="BB_4_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/BB.PNG" />
+                        <Image url="@images/BB.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="BB_5_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/BB.PNG" />
+                        <Image url="@images/BB.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="BB_6_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/BB.PNG" />
+                        <Image url="@images/BB.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="BF_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/BF.PNG" />
+                        <Image url="@images/BF.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="8.0" right="8.0" />
+                     </HBox.margin>
                   </ImageView>
                </children></HBox>
          </children>
