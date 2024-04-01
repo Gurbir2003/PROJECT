@@ -108,9 +108,10 @@
             </HBox>
             <HBox prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ListView prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #d7ae60;" />
-                  <Button fx:id="placement_button" mnemonicParsing="false" onAction="#randomPlacement" prefHeight="200.0" prefWidth="200.0" text="Place Player Piece" />
-                  <ListView prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #d7ae60;" />
+                  <ListView prefHeight="200.0" prefWidth="0.0" style="-fx-background-color: #d7ae60;" />
+                  <Button fx:id="player_placement_button" mnemonicParsing="false" onAction="#randomPlayerPlacement" prefHeight="200.0" prefWidth="200.0" text="Place Player Pieces" />
+                  <ListView prefHeight="200.0" prefWidth="0.0" style="-fx-background-color: #d7ae60;" />
+                  <Button fx:id="ai_placement_button" mnemonicParsing="false" onAction="#randomAIPlacement" prefHeight="200.0" prefWidth="200.0" text="Place AI Pieces" />
                </children>
             </HBox>
             <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="400.0" prefWidth="200.0">
@@ -293,7 +294,7 @@
                   </Label>
                   <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/BS.PNG" />
+                        <Image url="@images/B1.PNG" />
                      </image>
                   </ImageView>
                </children>
@@ -310,7 +311,7 @@
                   </Label>
                   <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/BB.PNG" />
+                        <Image url="@images/B0.PNG" />
                      </image>
                   </ImageView>
                </children>
@@ -607,65 +608,65 @@
                         <Insets bottom="8.0" right="8.0" />
                      </HBox.margin>
                   </ImageView>
-                  <ImageView fx:id="BS_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B1_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/BS.png" />
+                        <Image url="@images/B1.png" />
                      </image>
                      <HBox.margin>
                         <Insets bottom="8.0" right="8.0" />
                      </HBox.margin>
                   </ImageView>
-                  <ImageView fx:id="BB_1_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B0_1_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/BB.png" />
+                        <Image url="@images/B0.png" />
                      </image>
                      <HBox.margin>
                         <Insets bottom="8.0" right="8.0" />
                      </HBox.margin>
                   </ImageView>
-                  <ImageView fx:id="BB_2_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B0_2_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/BB.png" />
+                        <Image url="@images/B0.png" />
                      </image>
                      <HBox.margin>
                         <Insets bottom="8.0" right="8.0" />
                      </HBox.margin>
                   </ImageView>
-                  <ImageView fx:id="BB_3_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B0_3_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/BB.png" />
+                        <Image url="@images/B0.png" />
                      </image>
                      <HBox.margin>
                         <Insets bottom="8.0" right="8.0" />
                      </HBox.margin>
                   </ImageView>
-                  <ImageView fx:id="BB_4_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B0_4_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/BB.png" />
+                        <Image url="@images/B0.png" />
                      </image>
                      <HBox.margin>
                         <Insets bottom="8.0" right="8.0" />
                      </HBox.margin>
                   </ImageView>
-                  <ImageView fx:id="BB_5_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B0_5_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/BB.png" />
+                        <Image url="@images/B0.png" />
                      </image>
                      <HBox.margin>
                         <Insets bottom="8.0" right="8.0" />
                      </HBox.margin>
                   </ImageView>
-                  <ImageView fx:id="BB_6_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B0_6_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/BB.png" />
+                        <Image url="@images/B0.png" />
                      </image>
                      <HBox.margin>
                         <Insets bottom="8.0" right="8.0" />
                      </HBox.margin>
                   </ImageView>
-                  <ImageView fx:id="BF_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="B11_image_view" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/BF.png" />
+                        <Image url="@images/B11.png" />
                      </image>
                      <HBox.margin>
                         <Insets bottom="8.0" right="8.0" />
@@ -676,4 +677,3 @@
       </VBox>
    </bottom>
 </BorderPane>
-

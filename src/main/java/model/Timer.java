@@ -1,63 +1,69 @@
 package model;
 
-// Singleton design pattern
-public class Timer implements Runnable{
-	
-	// Attributes
-	private int hours;
-	private int minutes;
-	private int seconds;
-	private String name;
-	
-	// Constructor
-	public Timer(int h, int m, int s) {
-		this.setHours(h);
-		this.setMinutes(m);
-		this.setSeconds(s);
-	}
-	
-	// Default Constructor
-	public Timer(String name) {
-		this.setHours(0);
-		this.setMinutes(0);
-		this.setSeconds(0);
-		this.name = name;
-	}
-	
-	// What will the thread do
-	public void run() {
-		System.out.println("Thread started...");
-		try {
-			while(true) {
-				setSeconds(getSeconds() + 1);
-				if (getSeconds() == 60) {
-					setSeconds(0);
-					setMinutes(getMinutes() + 1);
-					if (getMinutes() == 60) {
-						setMinutes(0);
-						setHours(getHours() + 1);
-					}
-				}
-				System.out.println(this); // Use toString to print the timer
-				Thread.sleep(1000);
-			}
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	public String toString() {
-		String str = String.format("%02d:%02d:%02d", getHours(), getMinutes(), getSeconds());
-		return str;
+
+import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
+//Singleton design pattern
+public class Timer {
+    private int hours;
+    private int minutes;
+    private int seconds;
+    private boolean running;
+    private final StringProperty timeString = new SimpleStringProperty(this, "timeString", "00:00:00");
+
+    
+    public void start() {
+        running = true;
+        Thread timerThread = new Thread(() -> {
+            try {
+                while (running) {
+                    incrementTime();
+                    String time = toString();
+                    Platform.runLater(() -> timeString.set(time)); // Update on FX thread
+                    Thread.sleep(1000);
+                }
+            } catch (InterruptedException e) {
+                running = false;
+                Thread.currentThread().interrupt();
+            }
+        });
+        timerThread.setDaemon(true);
+        timerThread.start();
+    }
+
+    public void stop() {
+        running = false;
+    }
+
+    private void incrementTime() {
+        setSeconds(getSeconds() + 1);
+        if (getSeconds() == 60) {
+            setSeconds(0);
+            setMinutes(getMinutes() + 1);
+            if (getMinutes() == 60) {
+                setMinutes(0);
+                setHours(getHours() + 1);
+            }
+        }
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%02d:%02d:%02d", getHours(), getMinutes(), getSeconds());
+    }
+
+    public StringProperty timeStringProperty() {
+        return timeString;
+    }
+
+	public int getHours() {
+		return hours;
 	}
 
-	public int getSeconds() {
-		return seconds;
-	}
-
-	public void setSeconds(int seconds) {
-		this.seconds = seconds;
+	public void setHours(int hours) {
+		this.hours = hours;
 	}
 
 	public int getMinutes() {
@@ -68,12 +74,11 @@ public class Timer implements Runnable{
 		this.minutes = minutes;
 	}
 
-	public int getHours() {
-		return hours;
+	public int getSeconds() {
+		return seconds;
 	}
 
-	public void setHours(int hours) {
-		this.hours = hours;
+	public void setSeconds(int seconds) {
+		this.seconds = seconds;
 	}
 }
-

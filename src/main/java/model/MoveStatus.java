@@ -1,0 +1,7 @@
+package model;
+
+public enum MoveStatus {
+	
+	INVALID_DIRECTION, OUT_OF_BOUND, SIMPLE, ATTACK, FLAG_CAPTURE, INVALID_SCOUT_MOVEMENT, ERROR;
+
+}

@@ -1,6 +1,45 @@
 #CHANGELOG
 
-## [v0.1.7]
+## [V0.2.1]
+### Added
+- Game class removed as it was for the game logic and not required anymore for the game GUI
+- Board now handles all board movements and rules within the game
+- Refactoring and cleaning of classes Board and StrategoController
+
+### Modified
+- Board now that care of checking if water cell rather than Controller.
+
+### Deleted
+- Game class
+- Stratego class
+- Strategy Design Pattern
+
+
+## [V0.2.0]
+### Added
+- GUI improvement with auto placement of pieces for the AI using a thread
+- GUI improvement with creation of a group of threads destroyed on application ending
+- Link between Model (Game) and View (FXML) using the Controller
+- Piece placement on both logical and visual board
+- Piece movement on both logical and visual board
+- Added a Pane on each GridPane cell for highlighting them when user select a piece
+- Highlight of cell that can be reached by a player movement.
+- Added 2 Enum's (AttackStatus, MoveStatus)
+
+### Modified
+- Timer class now handling the timer thread and not the Controller anymore.
+- Setup of ImageView array refactored to follow the DRY principle.
+- Board class now using the two Enum's.
+
+## [V0.1.8]
+- GUI improvement with auto placement of pieces for the player
+- GUI improvement with swap of pieces possible
+- GUI improvement with player able to start the game when all pieces placed
+- GUI improvement with water displayed in the centre of the board
+- GUI improvement with impossibility to place a player piece out of the boundary of the player part of the board
+- GUI improvement with a start and reset button
+
+## [V0.1.7]
 ### Added
 - Code so that pieces can now be drag and dropped.
 
