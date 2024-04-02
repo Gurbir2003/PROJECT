@@ -9,6 +9,8 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 public class Board {
 	
@@ -16,9 +18,13 @@ public class Board {
 	private final int NUM_ROWS = 10;
 	private final int NUM_COLS = 10;
 	
+	private Player aiPlayer;
+	
 	public Board() {
 		this.grid = new Square[NUM_ROWS][NUM_COLS];
 		initializeBoard();
+		this.aiPlayer = new Player("AI", Color.RED);
+	    placeAIPiecesRandomly();
 	}
 	
 	private void initializeBoard() {
@@ -35,6 +41,32 @@ public class Board {
 				}
 			}
 		}
+	}
+	
+	public void placeAIPiecesRandomly() {
+	    for (Map.Entry<PieceType, Integer> entry : aiPlayer.getPieceSet().entrySet()) {
+	        PieceType type = entry.getKey();
+	        int count = entry.getValue();
+
+	        for (int i = 0; i < count; i++) {
+	            Position pos = findRandomFreePositionForAI();
+	            if (pos != null) {
+	                Piece piece = new Piece(type, aiPlayer.getTeamColor());
+	                placePiece(pos.getRow(), pos.getColumn(), piece);
+	            }
+	        }
+	    }
+	}
+
+	private Position findRandomFreePositionForAI() {
+	    Random rand = new Random();
+	    while (true) {
+	        int row = rand.nextInt(4);
+	        int col = rand.nextInt(NUM_COLS);
+	        if (grid[row][col].getPiece() == null && !isWaterCell(new Position(row, col))) {
+	            return new Position(row, col);
+	        }
+	    }
 	}
 	
 	public void displayBoard() {

@@ -1,4 +1,9 @@
 #CHANGELOG
+## [V0.2.2]
+### Added
+- AI movement
+- Controller processes the game as a turned-based game.
+
 
 ## [V0.2.1]
 ### Added

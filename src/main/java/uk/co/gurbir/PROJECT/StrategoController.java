@@ -1,5 +1,6 @@
 package uk.co.gurbir.PROJECT;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -100,6 +101,8 @@ public class StrategoController {
     private Timer timer;
     private Board board;
     private Map<ImageView, Piece> imageViewToPieceMap = new HashMap<>();
+    
+    private boolean isPlayerTurn = true;
 
     @FXML
     public void initialize() {
@@ -375,40 +378,51 @@ public class StrategoController {
     
     @FXML
     void randomAIPlacement(ActionEvent event) {
-    	Thread aiPlacementThread = new Thread(() -> {
+        Thread aiPlacementThread = new Thread(() -> {
             int minRow = 0;
             int maxRow = 3;
             int columns = map_grid_pane.getColumnConstraints().size();
-            Image redPieceImage = new Image(getClass().getResourceAsStream("images/R12.png"));
+            List<ImageView> tempImages = new ArrayList<>();
 
-            for (int i = 0; i < 40; i++) {
-                ImageView redPiece = new ImageView(redPieceImage);
-                Platform.runLater(() -> {
-                	Position randomPosition;
-                    redPiece.setFitWidth(CELL_WIDTH);
-                    redPiece.setFitHeight(CELL_HEIGHT);
-                    do {
-                        int randomRow = minRow + (int) (Math.random() * ((maxRow - minRow) + 1));
-                        int randomColumn = (int) (Math.random() * columns);
-                        randomPosition = new Position(randomRow, randomColumn);
-                    } while (isPositionOccupiedByEither(randomPosition));
-
-                    map_grid_pane.add(redPiece, randomPosition.getColumn(), randomPosition.getRow());
-                    aiPiecesPosition.put(redPiece, randomPosition);
-                });
-
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    System.out.println("AI placement thread was interrupted");
-                    break;
+            Platform.runLater(() -> {
+                for (int row = minRow; row <= maxRow; row++) {
+                    for (int col = 0; col < columns; col++) {
+                        if (!board.isWaterCell(new Position(row, col))) {
+                            ImageView redPiece = new ImageView(new Image(getClass().getResourceAsStream("images/R12.png")));
+                            redPiece.setFitWidth(CELL_WIDTH);
+                            redPiece.setFitHeight(CELL_HEIGHT);
+                            map_grid_pane.add(redPiece, col, row);
+                            tempImages.add(redPiece);
+                            aiPiecesPosition.put(redPiece, new Position(row, col));
+                        }
+                    }
                 }
+            });
+
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                return;
             }
-            if (areAllPiecesPlaced()) {
-            	start_button.setDisable(false);
-                System.out.println("All pieces have been placed. Game can start.");
-            }
+
+            Platform.runLater(() -> {
+                for (ImageView imgView : tempImages) {
+                    Position pos = aiPiecesPosition.get(imgView);
+                    Piece piece = board.getBoard()[pos.getRow()][pos.getColumn()].getPiece();
+                    if (piece != null) {
+                    	String pieceName = "R" + String.format("%02d", piece.getPieceType().getRank());
+                        String imageName = "images/" + pieceName + ".png";
+                        Image pieceImage = new Image(getClass().getResourceAsStream(imageName));
+                        imgView.setImage(pieceImage);
+                    }
+                }
+
+                if (areAllPiecesPlaced()) {
+                    start_button.setDisable(false);
+                    System.out.println("All pieces have been placed. Game can start.");
+                }
+            });
         });
         threads.add(aiPlacementThread);
         aiPlacementThread.start();
@@ -457,7 +471,7 @@ public class StrategoController {
         // Check if it's the player's turn and the piece can be moved
         if (gameStarted && canPieceBeMoved(clickedPiece)) {
             if (selectedPiece != null) {
-                //clearHighlightedMoves(); // Clear any previously highlighted moves
+                clearHighlightedMoves();
             	System.out.println("Piece selected");
             }
             selectedPiece = clickedPiece;
@@ -468,8 +482,15 @@ public class StrategoController {
     
     private boolean canPieceBeMoved(ImageView clickedPiece) {
         Position pos = playerPiecesPosition.get(clickedPiece);
+        Piece piece = imageViewToPieceMap.get(clickedPiece);
+
+        // Check if the piece is a Bomb or a Flag, which should not be movable.
+        if (piece.getPieceType() == PieceType.BOMB || piece.getPieceType() == PieceType.FLAG) {
+            return false; // Bombs and Flags cannot move.
+        }
         return board.lookAround(pos.getRow(), pos.getColumn());
     }
+
     
     private void highlightValidMoves(ImageView piece) {
         Position piecePosition = playerPiecesPosition.get(piece);
@@ -517,8 +538,11 @@ public class StrategoController {
                 movePieceInView(selectedPiece, toPosition);
                 clearHighlightedMoves();
                 selectedPiece = null; // Deselect the piece after moving
-
-                board.displayBoard(); // For debugging, can be removed later
+                board.displayBoard();
+                
+                toggleTurn(); 
+                aiMove();
+                
             } else {
                 // Move was not successful; handle accordingly later
             }
@@ -526,9 +550,12 @@ public class StrategoController {
             // Move is invalid; possibly show some feedback to user
         }
     }
+    
+    
+    private void toggleTurn() {
+        isPlayerTurn = !isPlayerTurn;
+    }
 
-    
-    
     private void clearHighlightedMoves() {
         for (Node node : map_grid_pane.getChildren()) {
             if (node instanceof StackPane) {
@@ -548,6 +575,66 @@ public class StrategoController {
         Integer row = GridPane.getRowIndex(node);
         Integer col = GridPane.getColumnIndex(node);
         return new Position(row != null ? row : 0, col != null ? col : 0);
+    }
+    
+    
+    private void aiMove() {
+        if (!isPlayerTurn) {
+            new Thread(() -> {
+                try {
+                    Thread.sleep(500);
+                    Platform.runLater(() -> {
+                        System.out.println("AI is making a move...");
+
+                        List<Position> movablePositions = getMovableAIPieces();
+                        int randomIndex = (int) (Math.random() * movablePositions.size());
+                        Position selectedPiecePosition = movablePositions.get(randomIndex);
+                        List<Position> validMoves = board.calculateValidMoves(selectedPiecePosition.getRow(), selectedPiecePosition.getColumn());
+                        Position moveTo = validMoves.get((int) (Math.random() * validMoves.size()));
+                        board.movePiece(selectedPiecePosition.getRow(), selectedPiecePosition.getColumn(), moveTo.getRow(), moveTo.getColumn());
+                        ImageView movingPieceView = findImageViewByPosition(selectedPiecePosition, aiPiecesPosition);
+                        if (movingPieceView != null) {
+                            updatePiecePositionInView(movingPieceView, selectedPiecePosition, moveTo);
+                        }
+                        toggleTurn();
+                        System.out.println("AI has moved. Your turn.");
+                    });
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }).start();
+        }
+    }
+
+    private ImageView findImageViewByPosition(Position position, Map<ImageView, Position> positionMap) {
+        for (Map.Entry<ImageView, Position> entry : positionMap.entrySet()) {
+            if (entry.getValue().equals(position)) {
+                return entry.getKey();
+            }
+        }
+        return null;
+    }
+
+    private void updatePiecePositionInView(ImageView pieceView, Position fromPosition, Position toPosition) {
+        aiPiecesPosition.put(pieceView, toPosition);
+        map_grid_pane.getChildren().remove(pieceView);
+        map_grid_pane.add(pieceView, toPosition.getColumn(), toPosition.getRow());
+    }
+
+    private List<Position> getMovableAIPieces() {
+        List<Position> movablePositions = new ArrayList<>();
+        for (int row = 0; row <= 3; row++) {
+            for (int col = 0; col < board.getNumCols(); col++) {
+                Position position = new Position(row, col);
+                Piece piece = board.getBoard()[row][col].getPiece();
+                if (piece != null && piece.getPieceColor() == Color.RED &&
+                        !(piece.getPieceType() == PieceType.BOMB || piece.getPieceType() == PieceType.FLAG) &&
+                        board.lookAround(row, col)) {
+                    movablePositions.add(position);
+                }
+            }
+        }
+        return movablePositions;
     }
 
 
