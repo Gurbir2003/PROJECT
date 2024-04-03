@@ -1,12 +1,5 @@
 package model;
 
-/**
- * The Board class represents the game board that will be used for the game(Stratego). The board consists of a grid of 10 x 10 squares where pieces can be placed.
- * The board is initialised with grass squares and four water squares in specific positions.
- * It provides methods to display the logical and physical representation of the board, as well as to place a piece on the board.
- *
- */
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -230,12 +223,15 @@ public class Board {
 	
 	
 	public boolean isValidMove(Position from, Position to) {
-        // Simplified example; you'll adapt this based on your actual game logic.
-        // This could call calculateValidMoves(from) and check if 'to' is in the returned list,
-        // or directly replicate the necessary logic here.
         List<Position> validMoves = calculateValidMoves(from.getRow(), from.getColumn());
         return validMoves.contains(to);
     }
+	
+	
+	public boolean isEnemyPieceAt(Position position, Color playerColor) {
+	    Piece piece = getBoard()[position.getRow()][position.getColumn()].getPiece();
+	    return piece != null && piece.getPieceColor() != playerColor;
+	}
 	
 	
 	/**
@@ -247,21 +243,14 @@ public class Board {
      * @param toCol the target column to move the piece to.
      * @return true if the move is successful, false otherwise.
      */
-    public boolean movePiece(int fromRow, int fromCol, int toRow, int toCol) {
+    public MoveStatus movePiece(int fromRow, int fromCol, int toRow, int toCol) {
         // Determine the direction of the move based on from and to positions
         String direction = determineDirection(fromRow, fromCol, toRow, toCol);
 
         // Call the Board's movePiece method directly with the calculated direction
         MoveStatus moveStatus = movePiece(fromRow, fromCol, direction, calculateMoveDistance(fromRow, fromCol, toRow, toCol));
 
-        // Interpret the result of the move and return true or false accordingly
-        if (moveStatus == MoveStatus.SIMPLE || moveStatus == MoveStatus.ATTACK) {
-            // The move was successful
-            return true;
-        } else {
-            // The move failed for some reason (invalid move, out of bounds, etc.)
-            return false;
-        }
+        return moveStatus;
     }
 
     private String determineDirection(int fromRow, int fromCol, int toRow, int toCol) {
@@ -276,7 +265,7 @@ public class Board {
         return Math.max(Math.abs(toRow - fromRow), Math.abs(toCol - fromCol));
     }
 
-	private AttackStatus getAttackResult(Piece p, Piece otherPiece, int row, int col, int offsetRow, int offsetCol) {
+	public AttackStatus getAttackResult(Piece p, Piece otherPiece, int row, int col, int offsetRow, int offsetCol) {
 		int result = p.attack(otherPiece);
 		if (result == 0) {
 			System.out.println("It's a draw.");
@@ -375,5 +364,9 @@ public class Board {
 	 */
 	public int getNumCols() {
 		return NUM_COLS;
+	}
+
+	public Player getAiPlayer() {
+		return aiPlayer;
 	}
 }

@@ -1,4 +1,11 @@
 #CHANGELOG
+## [V0.2.3]
+### Added
+- Rules section in the help section.
+
+### Modified
+- Refactoring of StrategoController class(Although there is a slight bug when the placing the pieces. This was done during testing).
+
 ## [V0.2.2]
 ### Added
 - AI movement

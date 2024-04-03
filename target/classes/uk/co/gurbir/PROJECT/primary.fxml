@@ -337,7 +337,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem fx:id="menuHelpRules" text="Rules" onAction="#showRules"/>
             </items>
           </Menu>
         </menus>
@@ -677,3 +677,4 @@
       </VBox>
    </bottom>
 </BorderPane>
+
