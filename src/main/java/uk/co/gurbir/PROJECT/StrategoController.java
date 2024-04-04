@@ -20,8 +20,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.lang.reflect.Field;
 
 import javafx.animation.PauseTransition;
@@ -31,9 +33,11 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
@@ -41,10 +45,8 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
-import model.AttackStatus;
 import model.Board;
 import model.Color;
 import model.MoveStatus;
@@ -117,7 +119,7 @@ public class StrategoController {
     
     private Map<ImageView, ImageView> imageViewToCoverMapAI = new HashMap<>();
     
-    private Image coverImage = new Image(getClass().getResourceAsStream("images/R12.png"));
+    private Image coverImage;
     
     private ImageView draggedImageView = null;
     private ImageView selectedPiece = null;
@@ -134,24 +136,73 @@ public class StrategoController {
     private Timer timer;
     private Board board;
     
+    private String aiDifficulty;
+    private String playerName;
     private boolean isPlayerTurn = true;
     
     private MessageService messageService = new MessageService();
 
     @FXML
     public void initialize() {
-    	start_button.setText("Start");
-    	start_button.setDisable(true);
+    	Thread startDialogBox = new Thread(() -> {
+            Platform.runLater(() -> {
+                showPlayerSetupDialog();
+                start_button.setText("Start");
+            	start_button.setDisable(true);
+            });
+        });
+    	threads.add(startDialogBox);
+    	startDialogBox.start();
     	
+    	
+    	Thread initAll = new Thread(() -> {
+            preloadResources();
+            Platform.runLater(() -> {
+                setupPlayerImageArray();
+                setupImageViewToPieceMapping();
+                setupBoard();
+                dragAndDropMapSetup();
+                listenForMessages();
+                initializePieceCountListView();
+            });
+        });
+    	threads.add(initAll);
+    	initAll.start();
+
     	board = new Board(messageService);
     	timer = new Timer();
         timer_label.textProperty().bind(timer.timeStringProperty());
+    }
+    
+    
+    private void preloadResources() {
+        coverImage = new Image(getClass().getResourceAsStream("images/R12.png"));
+    }
+    
+    
+    private void showPlayerSetupDialog() {
+        // Player name input
+        TextInputDialog nameDialog = new TextInputDialog("Player");
+        nameDialog.setTitle("Player Setup");
+        nameDialog.setHeaderText("Enter Your Name");
+        nameDialog.setContentText("Name:");
+        Optional<String> nameResult = nameDialog.showAndWait();
+        nameResult.ifPresent(name -> playerName = name);
+
+        // Difficulty selection
+        List<String> choices = new ArrayList<>();
+        choices.add("Easy");
+        choices.add("Normal");
+        choices.add("Hard");
+
+        ChoiceDialog<String> difficultyDialog = new ChoiceDialog<>("Normal", choices);
+        difficultyDialog.setTitle("Difficulty Selection");
+        difficultyDialog.setHeaderText("Select AI Difficulty");
+        difficultyDialog.setContentText("Difficulty:");
+        Optional<String> difficultyResult = difficultyDialog.showAndWait();
         
-        setupPlayerImageArray();
-        setupImageViewToPieceMapping();
-        setupBoard();
-        dragAndDropMapSetup();
-        listenForMessages();
+		difficultyResult.ifPresent(difficulty -> aiDifficulty = difficulty);
+		messageService.addMessage("AI Difficulty selected: " + aiDifficulty);
     }
     
     private void listenForMessages() {
@@ -159,6 +210,31 @@ public class StrategoController {
             Platform.runLater(() -> history_listview.getItems().add(timer + ": " + newMsg));
             history_listview.scrollTo(history_listview.getItems().size() - 1);
         });
+    }
+    
+    private void initializePieceCountListView() {
+        Map<PieceType, Integer> initialPieceCounts = new LinkedHashMap<>(); // Preserves insertion order
+        // Insert in the order of piece strength, strongest at the top
+        initialPieceCounts.put(PieceType.FLAG, 1);
+        initialPieceCounts.put(PieceType.MARSHAL, 1);
+        initialPieceCounts.put(PieceType.GENERAL, 1);
+        initialPieceCounts.put(PieceType.COLONEL, 2);
+        initialPieceCounts.put(PieceType.MAJOR, 3);
+        initialPieceCounts.put(PieceType.CAPTAIN, 4);
+        initialPieceCounts.put(PieceType.LIEUTENANT, 4);
+        initialPieceCounts.put(PieceType.SERGEANT, 4);
+        initialPieceCounts.put(PieceType.MINER, 5); // Useful for disarming Bombs
+        initialPieceCounts.put(PieceType.SCOUT, 8);
+        initialPieceCounts.put(PieceType.SPY, 1); // Unique because it can defeat the Marshal
+        initialPieceCounts.put(PieceType.BOMB, 6); // Not a mobile piece but strong in defense
+
+        red_listview.getItems().clear();
+        blue_listview.getItems().clear();
+        for (Map.Entry<PieceType, Integer> entry : initialPieceCounts.entrySet()) {
+            String entryString = String.format("%s: 0/%d", entry.getKey(), entry.getValue());
+            red_listview.getItems().add(entryString);
+            blue_listview.getItems().add(entryString);
+        }
     }
     
     private void dragAndDropMapSetup() {
@@ -191,7 +267,7 @@ public class StrategoController {
                             board.placePiece(newRow, newColumn, piece);
                         }
                         
-                        board.displayBoard();
+                        //board.displayBoard();
                         
                         success = true;
                     }
@@ -218,7 +294,7 @@ public class StrategoController {
                     	        pieceAtNewPosition.setFitWidth(CELL_WIDTH);
                     	        pieceAtNewPosition.setFitHeight(CELL_HEIGHT);
                     	        
-                    	        board.displayBoard();
+                    	        //board.displayBoard();
 
                     	        success = true;
                     	    }
@@ -236,7 +312,7 @@ public class StrategoController {
 	
 	                    if (success && areAllPiecesPlaced()) {
 	                    	start_button.setDisable(false);
-	                    	messageService.addMessage("All pieces have been placed. Game can start.");
+	                    	messageService.addMessage("All pieces have been placed.\nThe Game can start.");
 	                    }
                     }
                 }
@@ -330,6 +406,7 @@ public class StrategoController {
     }
 
     private Piece mapNameToPiece(String fieldName) {
+        // Remove the first character and anything after the underscore
         String numberStr = fieldName.substring(1).split("_")[0];
         
         try {
@@ -384,8 +461,19 @@ public class StrategoController {
         }
     }
     
+    private void clearExistingPlacements() {
+        Platform.runLater(() -> {
+            for (ImageView imageView : player_images) {
+                map_grid_pane.getChildren().remove(imageView);
+            }
+            playerPiecesPosition.clear();
+            board.clearPlayerPieces();
+        });
+    }
+    
     @FXML
     void randomPlayerPlacement(ActionEvent event) {
+    	clearExistingPlacements();
     	Thread playerPlacementThread = new Thread(() -> {
             int minRow = map_grid_pane.getRowConstraints().size() - 4;
             int maxRow = map_grid_pane.getRowConstraints().size() - 1;
@@ -412,18 +500,17 @@ public class StrategoController {
                         board.placePiece(randomPosition.getRow(), randomPosition.getColumn(), modelPiece);
                     }
                 });
-                
                 try {
-                    Thread.sleep(500); 
+                    Thread.sleep(500); // Pause for half a second
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
-                    return; 
+                    return; // Exit the loop/thread if interrupted
                 }
             }
             
             Platform.runLater(() -> {
                 if (areAllPiecesPlaced()) {
-                	messageService.addMessage("All player pieces have been randomly placed.\nGame can start");
+                	messageService.addMessage("All player pieces have been randomly placed.\nThe Game can start");
                     start_button.setDisable(false);
                 }
             });
@@ -443,7 +530,7 @@ public class StrategoController {
 
             Map<PieceType, Integer> AIPiecesSet = board.getAiPlayer().getPieceSet();
             List<Piece> allAIPieces = generateAIPiecesFromMap(AIPiecesSet);
-        
+            // Collections.shuffle(allAIPieces);
 
             int pieceIndex = 0;
             for (int row = minRow; row <= maxRow && pieceIndex < allAIPieces.size(); row++) {
@@ -468,14 +555,13 @@ public class StrategoController {
                             aiPiecesPosition.put(aiPieceImageView, new Position(finalRow, finalCol));
                             board.placePiece(finalRow, finalCol, currentPiece);
 
-                           
+                            // Add cover on top of the real AI piece
                             map_grid_pane.add(coverImageView, finalCol, finalRow);
 
-                            
+                            // Store the cover ImageView with the actual piece ImageView
                             imageViewToCoverMapAI.put(aiPieceImageView, coverImageView);
                         });
 
-                    
                         try {
                             Thread.sleep(500);
                         } catch (InterruptedException e) {
@@ -488,7 +574,7 @@ public class StrategoController {
             Platform.runLater(() -> {
                 if (areAllPiecesPlaced()) {
                     start_button.setDisable(false);
-                    messageService.addMessage("All pieces have been placed. Game can start.");
+                    messageService.addMessage("All pieces have been placed.\nThe Game can start.");
                 }
             });
         });
@@ -548,7 +634,7 @@ public class StrategoController {
         Position pos = playerPiecesPosition.get(clickedPiece);
         Piece piece = imageViewToPieceMapPlayer.get(clickedPiece);
 
-    
+        // Check if the piece is a Bomb or a Flag, which should not be movable.
         if (piece.getPieceType() == PieceType.BOMB || piece.getPieceType() == PieceType.FLAG) {
             return false; // Bombs and Flags cannot move.
         }
@@ -585,7 +671,7 @@ public class StrategoController {
     
     private void handleSquareClick(MouseEvent event, int row, int col) {
         if (selectedPiece == null || !gameStarted) {
-        	messageService.addMessage("No piece selected or game hasn't started.");
+        	//messageService.addMessage("No piece selected.");
             return;
         }
 
@@ -606,9 +692,9 @@ public class StrategoController {
                 aiMove();
             }
         } else {
-        	messageService.addMessage("Selected move is not an attack or invalid target.");
+        	//messageService.addMessage("Selected move is not an attack or invalid target.");
         }
-        board.displayBoard();
+        //board.displayBoard();
     }
     
     private void handleAttackOutcome(Position fromPosition, Position toPosition) {
@@ -628,7 +714,7 @@ public class StrategoController {
         }
         
         if (attackingPiece == null || defendingPiece == null) {
-        	messageService.addMessage("Invalid attack scenario.");
+        	//messageService.addMessage("Invalid attack scenario.");
             return;
         }
 
@@ -647,14 +733,14 @@ public class StrategoController {
                     imageViewToCoverMapAI.remove(defenderImageView);
                 }
                 movePieceInView(selectedPiece, toPosition);
-                messageService.addMessage("Attacker wins and moves to defender's position.");
+                messageService.addMessage("Attacker " + playerName + " wins and moves to defender's position.");
                 break;
             case -1: // Defender wins
             	updateListView(selectedPiece, attackingPiece);
                 map_grid_pane.getChildren().remove(selectedPiece);
                 playerPiecesPosition.remove(selectedPiece);
                 imageViewToPieceMapPlayer.remove(selectedPiece);
-                messageService.addMessage("Defender wins, attacker removed.");
+                messageService.addMessage("Defender wins, attacker " + playerName + " removed.");
                 break;
             case 0: // Draw
             	updateListView(selectedPiece, attackingPiece);
@@ -667,7 +753,7 @@ public class StrategoController {
                     aiPiecesPosition.remove(defenderImageView);
                     imageViewToCoverMapAI.remove(defenderImageView);
                 }
-                messageService.addMessage("Both pieces are removed.");
+                messageService.addMessage("Both " + playerName + " and AI pieces are removed.");
                 break;
         }
         clearHighlightedMoves();
@@ -717,7 +803,6 @@ public class StrategoController {
                             if (!validMoves.isEmpty()) {
                                 Position moveTo = validMoves.get((int) (Math.random() * validMoves.size()));
                                 if (board.isEnemyPieceAt(moveTo, Color.RED)) {
-                                	System.out.println("AI trying to attack!");
                                     handleAIAttackOutcome(selectedPiecePosition, moveTo);
                                 } else if (board.isValidMove(selectedPiecePosition, moveTo)) {
                                     board.movePiece(selectedPiecePosition.getRow(), selectedPiecePosition.getColumn(), moveTo.getRow(), moveTo.getColumn());
@@ -727,7 +812,7 @@ public class StrategoController {
                                         updatePiecePositionInView(movingPieceView, coverView, selectedPiecePosition, moveTo);
                                     }
                                     toggleTurn();
-                                    board.displayBoard();
+                                    //board.displayBoard();
                                 }
                             }
                         }
@@ -744,12 +829,12 @@ public class StrategoController {
     private void updatePiecePositionInView(ImageView pieceView, ImageView coverView, Position fromPosition, Position toPosition) {
         aiPiecesPosition.put(pieceView, toPosition);
         if (coverView != null) {
-            imageViewToCoverMapAI.put(pieceView, coverView); 
+            imageViewToCoverMapAI.put(pieceView, coverView); // Update the cover map if needed
         }
         map_grid_pane.getChildren().removeAll(pieceView, coverView);
         map_grid_pane.add(pieceView, toPosition.getColumn(), toPosition.getRow());
         if (coverView != null) {
-            map_grid_pane.add(coverView, toPosition.getColumn(), toPosition.getRow()); 
+            map_grid_pane.add(coverView, toPosition.getColumn(), toPosition.getRow()); // Add cover on top of the real AI piece
         }
     }
 
@@ -771,7 +856,7 @@ public class StrategoController {
         }
 
         if (attackingPiece == null || defendingPiece == null) {
-        	messageService.addMessage("Invalid attack scenario for AI.");
+        	//messageService.addMessage("Invalid attack scenario for AI.");
             return;
         }
 
@@ -793,11 +878,11 @@ public class StrategoController {
                 }
                 ;
                 if (attackerImageView != null) {
-                	
+                	//movePieceInView(attackerImageView, toPosition);
                     updatePiecePositionInView(attackerImageView, coverView, fromPosition, toPosition);
                 }
                 
-                messageService.addMessage("AI wins and moves to player's position.");
+                messageService.addMessage("AI wins and moves to player's " + playerName + " position.");
                 break;
             case -1: // Defender (Player) wins
             	updateListView(attackerImageView, attackingPiece);
@@ -806,7 +891,7 @@ public class StrategoController {
                     aiPiecesPosition.remove(attackerImageView);
                     imageViewToCoverMapAI.remove(attackerImageView);
                 }
-                messageService.addMessage("Player defends successfully, AI piece removed.");
+                messageService.addMessage("Player " +  playerName  + " defends successfully, AI piece removed.");
                 break;
             case 0: // Draw
             	updateListView(attackerImageView, attackingPiece);
@@ -821,7 +906,7 @@ public class StrategoController {
                     playerPiecesPosition.remove(defenderImageView);
                     imageViewToPieceMapPlayer.remove(defenderImageView);
                 }
-                messageService.addMessage("Both pieces are removed in a draw.");
+                messageService.addMessage("Both pieces from " + playerName + " and AI are removed in a draw.");
                 break;
         }
         selectedPiece = null;
@@ -878,13 +963,30 @@ public class StrategoController {
     private void updateListView(ImageView imageView, Piece piece) {
         String pieceName = piece.getPieceType().toString();
         Platform.runLater(() -> {
-            if (piece.getPieceColor() == Color.RED) {
-                red_listview.getItems().add(pieceName);
-                red_listview.scrollTo(red_listview.getItems().size() - 1);
-            } else if (piece.getPieceColor() == Color.BLUE) {
-                blue_listview.getItems().add(pieceName);
-                blue_listview.scrollTo(blue_listview.getItems().size() - 1);
+            ListView<String> listView = piece.getPieceColor() == Color.RED ? red_listview : blue_listview;
+            List<String> updatedItems = new ArrayList<>();
+
+            for (String item : listView.getItems()) {
+                if (item.startsWith(pieceName)) {
+                    // Extract current count
+                    String[] parts = item.split(": ");
+                    String[] counts = parts[1].split("/");
+                    int deadCount = Integer.parseInt(counts[0]) + 1;
+                    int totalCount = Integer.parseInt(counts[1]);
+                    
+                    // Update the string with the new count
+                    String updatedItem = String.format("%s: %d/%d", pieceName, deadCount, totalCount);
+                    updatedItems.add(updatedItem);
+                } else {
+                    updatedItems.add(item); // Keep other items as is
+                }
             }
+
+            // Update the ListView with the new items
+            listView.getItems().setAll(updatedItems);
+
+            // Optionally scroll to the updated item
+            listView.scrollTo(pieceName);
         });
     }
     
@@ -911,13 +1013,6 @@ public class StrategoController {
     	gameStarted = true;
     	timer.start();
         start_button.setDisable(true);
-        System.out.println("Game started!");
-    }
-    
-    @FXML
-    void resetGame(ActionEvent event) {
-    	timer.stop();
-    	System.out.println("Reset done");
     }
     
     public void shutdown() {

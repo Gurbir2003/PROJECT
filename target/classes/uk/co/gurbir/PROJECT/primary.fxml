@@ -7,7 +7,6 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -81,7 +80,7 @@
                               <Insets right="150.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="reset_button" mnemonicParsing="false" onAction="#resetGame" text="Reset" />
+                        <Button fx:id="reset_button" mnemonicParsing="false" onAction="#shutdown" text="Quit" />
                      </children>
                   </HBox>
                </children>
@@ -100,13 +99,13 @@
                   </Label>
                </children>
             </HBox>
-            <HBox prefHeight="200.0" prefWidth="200.0">
+            <HBox prefHeight="330.0" prefWidth="200.0">
                <children>
                   <ListView fx:id="red_listview" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #d7ae60;" />
                   <ListView fx:id="blue_listview" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #d7ae60;" />
                </children>
             </HBox>
-            <HBox prefHeight="200.0" prefWidth="200.0">
+            <HBox prefHeight="70.0" prefWidth="200.0">
                <children>
                   <ListView prefHeight="200.0" prefWidth="0.0" style="-fx-background-color: #d7ae60;" />
                   <Button fx:id="player_placement_button" mnemonicParsing="false" onAction="#randomPlayerPlacement" prefHeight="200.0" prefWidth="200.0" text="Place Player Pieces" />
@@ -116,7 +115,6 @@
             </HBox>
             <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="400.0" prefWidth="200.0">
                <children>
-                  <ScrollBar orientation="VERTICAL" />
                   <ListView fx:id="history_listview" prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: #d7ae60;" />
                </children>
             </HBox>

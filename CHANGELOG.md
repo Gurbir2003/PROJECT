@@ -1,4 +1,22 @@
 #CHANGELOG
+
+## V0.2.5
+### Added
+- Threading to handle set up of game
+- Dialog box for player to choose a difficulty and enter their name
+- ListView for dead pieces with how many are still alive
+- History chat working
+
+### Removed
+- Cleaning of useless messages
+
+### Modified
+- Scout movement on both the GUI and board
+- Reset button became a shutdown button
+
+### Fixed
+- Bug that wasn't allowing the user to place their piece manually and end up automatically
+
 ## [V0.2.4]
 ### Added
 - JavaDoc to appropriate classes.
