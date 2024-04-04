@@ -55,6 +55,13 @@ public class Square {
 		this.piece = piece;
 	}
 	
+	/**
+	 * Generates a string representation of a square on the game board.
+	 * Water squares are represented as "WWW", empty grass squares as "###", and squares with a piece
+	 * display the first letter of the piece's colour followed by the two-digit rank of the piece.
+	 * 
+	 * @return a string that visually represents the content of a square.
+	 */
 	public String toString() {
 		if (this.type == SquareType.WATER) {
 			return "WWW ";

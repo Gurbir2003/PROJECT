@@ -88,12 +88,12 @@
             </VBox>
             <HBox prefHeight="40.0" prefWidth="360.0" style="-fx-background-color: #d7ae60; -fx-padding: 20; -fx-spacing: 20;">
                <children>
-                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="180.0" text="RED PIECE LEFT">
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="180.0" text="RED PIECE KILLED">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="180.0" text="BLUE PIECE LEFT">
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="180.0" text="BLUE PIECE KILLED">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -102,8 +102,8 @@
             </HBox>
             <HBox prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ListView prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #d7ae60;" />
-                  <ListView prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #d7ae60;" />
+                  <ListView fx:id="red_listview" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #d7ae60;" />
+                  <ListView fx:id="blue_listview" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #d7ae60;" />
                </children>
             </HBox>
             <HBox prefHeight="200.0" prefWidth="200.0">
@@ -117,7 +117,7 @@
             <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="400.0" prefWidth="200.0">
                <children>
                   <ScrollBar orientation="VERTICAL" />
-                  <ListView prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: #d7ae60;" />
+                  <ListView fx:id="history_listview" prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: #d7ae60;" />
                </children>
             </HBox>
 
@@ -337,7 +337,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem fx:id="menuHelpRules" text="Rules" onAction="#showRules"/>
+              <MenuItem fx:id="menuHelpRules" onAction="#showRules" text="Rules" />
             </items>
           </Menu>
         </menus>
@@ -677,4 +677,3 @@
       </VBox>
    </bottom>
 </BorderPane>
-

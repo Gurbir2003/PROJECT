@@ -1,4 +1,9 @@
 package model;
+/**
+ * Represents a board position with row and column. 
+ * Useful for tracking piece locations on the game board.
+ * Equipped with basic operations like setting/getting coordinates and checking equality.
+ */
 
 import java.util.Objects;
 
@@ -7,6 +12,12 @@ public class Position {
     private int row;
     private int column;
 
+    /**
+     * Constructs a Position instance representing a specific location on the board.
+     * 
+     * @param row the row coordinate of the position.
+     * @param column the column coordinate of the position.
+     */
     public Position(int row, int column) {
         this.row = row;
         this.column = column;

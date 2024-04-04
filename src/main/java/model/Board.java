@@ -1,9 +1,26 @@
 package model;
-
+/**
+ * Manages the game board for Stratego game, including initialising the board, placing pieces, and handling movements and attacks. 
+ * The board is a 10x10 grid with specific areas designated as water. 
+ * AI player pieces are placed randomly on the board at the start.
+ * 
+ * Functions include initialising the board with water and grass squares, placing AI player pieces randomly, calculating valid moves for pieces, moving pieces on the board, 
+ * and handling attacks between pieces.
+ * 
+ * Key Methods:
+ * - initializeBoard(): Sets up the grid with water and grass squares.
+ * - placeAIPiecesRandomly(): Places AI pieces on the board randomly.
+ * - calculateValidMoves(int, int): Calculates valid moves for a piece at the given position.
+ * - movePiece(int, int, String, int): Moves a piece in a specified direction.
+ * - isWaterCell(Position): Checks if a given position is water.
+ * - getAttackResult(Piece, Piece, int, int, int, int): Determines the outcome of an attack between two pieces.
+ */
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
+import uk.co.gurbir.PROJECT.MessageService;
 
 public class Board {
 	
@@ -13,8 +30,11 @@ public class Board {
 	
 	private Player aiPlayer;
 	
-	public Board() {
+	private MessageService messageService;
+	
+	public Board(MessageService messageService) {
 		this.grid = new Square[NUM_ROWS][NUM_COLS];
+		this.messageService = messageService;
 		initializeBoard();
 		this.aiPlayer = new Player("AI", Color.RED);
 	    placeAIPiecesRandomly();
@@ -36,6 +56,10 @@ public class Board {
 		}
 	}
 	
+	/**
+	 * Places AI player's pieces randomly on the game board.
+	 * Iterates over each piece type the AI player has, determines the number of each piece, and places them in random positions on the board that are not occupied by other pieces or water.
+	 */
 	public void placeAIPiecesRandomly() {
 	    for (Map.Entry<PieceType, Integer> entry : aiPlayer.getPieceSet().entrySet()) {
 	        PieceType type = entry.getKey();
@@ -50,7 +74,12 @@ public class Board {
 	        }
 	    }
 	}
-
+	
+	/**
+	 * Finds random places for the AI to place pieces randomly on the game board.
+	 * Ensures the selected position is not water and does not already contain a piece.
+	 * @return a valid, random position on the board for AI piece placement.
+	 */	
 	private Position findRandomFreePositionForAI() {
 	    Random rand = new Random();
 	    while (true) {
@@ -62,6 +91,10 @@ public class Board {
 	    }
 	}
 	
+	/**
+	 * Prints the current state of the board to the console/terminal.
+	 * Displays a 10x10 grid with each square's contents. Water squares and pieces are represented as per their toString implementations.
+	 */
 	public void displayBoard() {
 		System.out.println("   0   1   2   3   4   5   6   7   8   9");
 		for(int row=0; row<NUM_ROWS; row++) {
@@ -75,7 +108,12 @@ public class Board {
 		}
 	}
 	
-	
+	/**
+	 * Places a piece on the board at the specified coordinates.
+	 * @param i the row coordinate where the piece is to be placed.
+	 * @param j the column coordinate where the piece is to be placed.
+	 * @param p the Piece object to be placed on the board.
+	 */
 	public void placePiece(int i, int j, Piece p) {
 		grid[i][j].setPiece(p); 
 	}
@@ -89,7 +127,7 @@ public class Board {
     public List<Position> calculateValidMoves(int row, int col) {
         List<Position> validMoves = new ArrayList<>();
 
-        // Define offsets to look around the current position
+     
         int[][] offsets = {
             {-1, 0}, // Up
             {1, 0},  // Down
@@ -137,6 +175,16 @@ public class Board {
 		return false;
 	}
 	
+	/**
+	 * Checks for a free square adjacent to the given position with specified offsets.
+	 * A square is considered free if it is not water, is within the board boundaries, and either is empty or contains a piece of the opposing player.
+	 * 
+	 * @param row the base row coordinate to check from.
+	 * @param col the base column coordinate to check from.
+	 * @param offsetRow the row offset from the base position to check.
+	 * @param offsetCol the column offset from the base position to check.
+	 * @return true if the adjacent square is free as per the defined conditions; false otherwise.
+	 */
 	private boolean hasFreeSquare(int row, int col, int offsetRow, int offsetCol) {
 		// Can't select Water square or Empty Square
 		if (grid[row][col].getType() == SquareType.WATER ||
@@ -173,7 +221,7 @@ public class Board {
 	public MoveStatus movePiece(int row, int col, String direction, int how_many) {
 		int[] offset = getDirectionOffset(direction);
 		if (offset == null) {
-			System.out.println("Invalid direction, please enter Left (L), Right (R), Up (U) or Down (D).");
+			messageService.addMessage("Invalid direction, please enter Left (L), Right (R), Up (U) or Down (D).");
 			return MoveStatus.INVALID_DIRECTION;
 		}
 		
@@ -182,7 +230,7 @@ public class Board {
 
 		// Cannot go outside of boundaries of the game
 		if (!isWithinBoundaries(row, col, offsetRow, offsetCol)) {
-			System.out.println("Destination square is outside the boundaries of the board, please try again");
+			messageService.addMessage("Destination square is outside the boundaries of the board, please try again");
 			return MoveStatus.OUT_OF_BOUND;
 		}
 		
@@ -193,7 +241,7 @@ public class Board {
 				Piece p = grid[row][col].getPiece();
 				grid[row][col].setPiece(null);
 				grid[row+offsetRow][col+offsetCol].setPiece(p);
-				System.out.println("Move played successfully");
+				messageService.addMessage("Move played successfully");
 				return MoveStatus.SIMPLE;
 			}
 			// Check that position contain an enemy piece
@@ -202,22 +250,22 @@ public class Board {
 			if(p.getPieceColor() != otherPiece.getPieceColor()) {
 				AttackStatus attackResult = getAttackResult(p, otherPiece, row, col, offsetRow, offsetCol);
 				if (attackResult.equals(AttackStatus.FLAG_CAPTURE)) {
-					System.out.println("You captured the Flag!");
+					messageService.addMessage("You captured the Flag!");
 					return MoveStatus.FLAG_CAPTURE;
 				}
 				else if (attackResult.equals(AttackStatus.DRAW) || 
 						 attackResult.equals(AttackStatus.LOST) ||
 						 attackResult.equals(AttackStatus.WON)) {
-					System.out.println("Attack move played successfully!");
+					messageService.addMessage("Attack move played successfully!");
 					return MoveStatus.ATTACK;
 				}
 				else {
-					System.out.println("Could not process the attack move");
+					messageService.addMessage("Could not process the attack move");
 					return MoveStatus.ERROR;
 				}
 			}
 		}
-		System.out.println("Invalid Move.");
+		messageService.addMessage("Invalid Move.");
 		return MoveStatus.ERROR;
 	}
 	
@@ -244,10 +292,10 @@ public class Board {
      * @return true if the move is successful, false otherwise.
      */
     public MoveStatus movePiece(int fromRow, int fromCol, int toRow, int toCol) {
-        // Determine the direction of the move based on from and to positions
+        
         String direction = determineDirection(fromRow, fromCol, toRow, toCol);
 
-        // Call the Board's movePiece method directly with the calculated direction
+        
         MoveStatus moveStatus = movePiece(fromRow, fromCol, direction, calculateMoveDistance(fromRow, fromCol, toRow, toCol));
 
         return moveStatus;
@@ -261,24 +309,46 @@ public class Board {
         return "";
     }
 
+    /**
+     * Calculates the distance of a move on the board, considering both row and column displacement.
+     * The distance is the maximum of the absolute row and column differences, effectively measuring steps in a grid where diagonal moves are not allowed.
+     *
+     * @param fromRow the starting row position.
+     * @param fromCol the starting column position.
+     * @param toRow the target row position.
+     * @param toCol the target column position.
+     * @return the distance of the move as an integer.
+     */
     private int calculateMoveDistance(int fromRow, int fromCol, int toRow, int toCol) {
         return Math.max(Math.abs(toRow - fromRow), Math.abs(toCol - fromCol));
     }
 
+    /**
+     * Determines the outcome of an attack between two pieces on the board.
+     * The result can be a win, loss, draw, flag capture, or an error.
+     * 
+     * @param p the attacking piece.
+     * @param otherPiece the defending piece.
+     * @param row the row of the attacking piece.
+     * @param col the column of the attacking piece.
+     * @param offsetRow the row difference between attacker and defender.
+     * @param offsetCol the column difference between attacker and defender.
+     * @return the status of the attack (WIN, LOST, DRAW, FLAG_CAPTURE, ERROR) based on the combat rules.
+     */
 	public AttackStatus getAttackResult(Piece p, Piece otherPiece, int row, int col, int offsetRow, int offsetCol) {
 		int result = p.attack(otherPiece);
 		if (result == 0) {
-			System.out.println("It's a draw.");
-			System.out.println(p.getPieceColor() + " " + p.getPieceType() + " died.");
-			System.out.println(otherPiece.getPieceColor() + " " + otherPiece.getPieceType() + " died.");
+			messageService.addMessage("It's a draw.");
+			messageService.addMessage(p.getPieceColor() + " " + p.getPieceType() + " died.");
+			messageService.addMessage(otherPiece.getPieceColor() + " " + otherPiece.getPieceType() + " died.");
 			grid[row][col].setPiece(null);
 			grid[row+offsetRow][col+offsetCol].setPiece(null);
 			return AttackStatus.DRAW;
 		}
 		else if(result == -1) {
-			System.out.println(p.getPieceColor() + " lost the fight.");
-			System.out.println(p.getPieceColor() + " " + p.getPieceType() + " died.");
-			System.out.println(otherPiece.getPieceColor() + " " + otherPiece.getPieceType() + " survived.");
+			messageService.addMessage(p.getPieceColor() + " lost the fight.");
+			messageService.addMessage(p.getPieceColor() + " " + p.getPieceType() + " died.");
+			messageService.addMessage(otherPiece.getPieceColor() + " " + otherPiece.getPieceType() + " survived.");
 			grid[row][col].setPiece(null);
 			return AttackStatus.LOST;
 		}
@@ -286,9 +356,9 @@ public class Board {
 			if (otherPiece.getPieceType().equals(PieceType.FLAG)) {
 				return AttackStatus.FLAG_CAPTURE;
 			}
-			System.out.println(p.getPieceColor() + " won the fight.");
-			System.out.println(p.getPieceColor() + " " + p.getPieceType() + " survived.");
-			System.out.println(otherPiece.getPieceColor() + " " + otherPiece.getPieceType() + " died.");
+			messageService.addMessage(p.getPieceColor() + " won the fight.");
+			messageService.addMessage(p.getPieceColor() + " " + p.getPieceType() + " survived.");
+			messageService.addMessage(otherPiece.getPieceColor() + " " + otherPiece.getPieceType() + " died.");
 			grid[row][col].setPiece(null);
 			grid[row+offsetRow][col+offsetCol].setPiece(p);
 			return AttackStatus.WON;
@@ -323,6 +393,15 @@ public class Board {
 		return null;
 	}
 	
+	/**
+	 * Checks if a position, after applying the given offsets, is within the game board boundaries.
+	 * 
+	 * @param row the original row of the position.
+	 * @param col the original column of the position.
+	 * @param offsetRow the row offset to apply.
+	 * @param offsetCol the column offset to apply.
+	 * @return true if the new position is within the 10x10 board otherwise returns false.
+	 */
 	private boolean isWithinBoundaries(int row, int col, int offsetRow, int offsetCol) {
 		if (row + offsetRow < 0 || row + offsetRow > 9) {
 			return false;
@@ -333,7 +412,12 @@ public class Board {
 		return true;
 	}
 	
-	
+	/**
+	 * Determines if a specific board position is a water cell, which is non-traversable.
+	 * 
+	 * @param position the position to check.
+	 * @return true if the position is one of the predefined water cells otherwise returns false.
+	 */
 	public boolean isWaterCell(Position position) {
         int row = position.getRow();
         int col = position.getColumn();

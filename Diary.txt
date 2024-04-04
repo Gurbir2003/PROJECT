@@ -34,7 +34,6 @@ testing it on a small helloworld.java project.
 15/10/2023:
 - Followed a Scenebuilder tutorial online to create a small project.
 
-
 16/10/2023:
 - Familiarise myself with the interface of scenebuilder.
 

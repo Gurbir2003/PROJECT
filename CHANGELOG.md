@@ -1,4 +1,12 @@
 #CHANGELOG
+## [V0.2.4]
+### Added
+- JavaDoc to appropriate classes.
+- AI piece now covered. AI piece displayed for 5 seconds after an attack.
+- Player and AI move history
+- The list of pieces that have been killed.
+
+
 ## [V0.2.3]
 ### Added
 - Rules section in the help section.

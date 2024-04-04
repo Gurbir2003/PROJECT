@@ -11,7 +11,7 @@ public class BoardTest {
 	
 	@BeforeEach
 	public void init() {
-		board = new Board();
+		board = new Board(null);
 	}
 	
 	// Test for board initialisation
