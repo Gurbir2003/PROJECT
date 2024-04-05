@@ -72,3 +72,28 @@ Started writing JUnit tests using my basic classes from the UML Class Diagram (P
 
 05/12/2023 to 07/12/2023:
 - Implement movement and ability to attack for the pieces on the board.
+
+25/01/2024 to 05/02/2024: 
+- Added CHANGELOG.md whilst working on implementing code which allowed player to only move their respective piece
+
+07/02/2024 to 05/03/2024:
+- Merging of code done. A major issue/bug developed which did not allow me to work on my project for a very long time. Fixed after a lot of research.
+
+11/03/2024 to 15/03/2024:
+- Research on Scene Builder and JavaFX and create initial instances of the game board whilst adding other functionalities such size panels, grid pane etc. 
+
+18/03/2024 to 26/03/2024: 
+- Worked on setting up the controller and linking it with JavaFX. By this point the game board has been fully set up such as adding pieces, rules on the game board.
+
+27/03/2024 to 29/03/2024:
+- Added code that enabled it to be drag-and-dropped on the board. Continued with implementing the link between JavaFx and game logic.
+
+
+30/03/2024 to 31/03/2024:
+- Implemented code which allowed the player to randomly place pieces on the game board.
+
+01/04/2024 to 03/04/2024: 
+- Implement most of JavaFx whilst creating the AI and AI movement.
+
+04/04/2024 to 05/04/2024: 
+- Final touches and completion of report.

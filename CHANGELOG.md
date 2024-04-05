@@ -1,4 +1,10 @@
 #CHANGELOG
+## V1.0.0
+### Added
+- Final year report
+
+### Modified
+- readme.md
 
 ## V0.2.5
 ### Added

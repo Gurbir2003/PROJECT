@@ -555,10 +555,10 @@ public class StrategoController {
                             aiPiecesPosition.put(aiPieceImageView, new Position(finalRow, finalCol));
                             board.placePiece(finalRow, finalCol, currentPiece);
 
-                            // Add cover on top of the real AI piece
+                  
                             map_grid_pane.add(coverImageView, finalCol, finalRow);
 
-                            // Store the cover ImageView with the actual piece ImageView
+                   
                             imageViewToCoverMapAI.put(aiPieceImageView, coverImageView);
                         });
 
@@ -829,12 +829,12 @@ public class StrategoController {
     private void updatePiecePositionInView(ImageView pieceView, ImageView coverView, Position fromPosition, Position toPosition) {
         aiPiecesPosition.put(pieceView, toPosition);
         if (coverView != null) {
-            imageViewToCoverMapAI.put(pieceView, coverView); // Update the cover map if needed
+            imageViewToCoverMapAI.put(pieceView, coverView); 
         }
         map_grid_pane.getChildren().removeAll(pieceView, coverView);
         map_grid_pane.add(pieceView, toPosition.getColumn(), toPosition.getRow());
         if (coverView != null) {
-            map_grid_pane.add(coverView, toPosition.getColumn(), toPosition.getRow()); // Add cover on top of the real AI piece
+            map_grid_pane.add(coverView, toPosition.getColumn(), toPosition.getRow()); 
         }
     }
 
@@ -968,24 +968,23 @@ public class StrategoController {
 
             for (String item : listView.getItems()) {
                 if (item.startsWith(pieceName)) {
-                    // Extract current count
+
                     String[] parts = item.split(": ");
                     String[] counts = parts[1].split("/");
                     int deadCount = Integer.parseInt(counts[0]) + 1;
                     int totalCount = Integer.parseInt(counts[1]);
                     
-                    // Update the string with the new count
+ 
                     String updatedItem = String.format("%s: %d/%d", pieceName, deadCount, totalCount);
                     updatedItems.add(updatedItem);
                 } else {
-                    updatedItems.add(item); // Keep other items as is
+                    updatedItems.add(item);
                 }
             }
 
-            // Update the ListView with the new items
+   
             listView.getItems().setAll(updatedItems);
 
-            // Optionally scroll to the updated item
             listView.scrollTo(pieceName);
         });
     }

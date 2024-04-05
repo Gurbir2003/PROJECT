@@ -25,7 +25,7 @@ public class PieceTypeTest {
 		assertEquals("Flag", PieceType.FLAG.getName());
 	}
 
-	// Test for checking the rank of ePieceTypes match their expected values
+	// Test for checking the rank of PieceTypes match their expected values
 	@Test
 	public void testPieceRank() {
 		assertEquals(0, PieceType.BOMB.getRank());
