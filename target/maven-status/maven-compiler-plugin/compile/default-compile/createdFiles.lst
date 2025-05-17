@@ -1,9 +1,8 @@
 model\SquareType.class
 uk\co\gurbir\PROJECT\SecondaryController.class
-model\Piece.class
 model\Timer.class
-uk\co\gurbir\PROJECT\App.class
-model\Stratego.class
-uk\co\gurbir\PROJECT\PrimaryController.class
 model\Square.class
 model\Color.class
+model\Piece.class
+uk\co\gurbir\PROJECT\PrimaryController.class
+uk\co\gurbir\PROJECT\App.class
